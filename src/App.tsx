@@ -1,6 +1,6 @@
 import React from "react";
 import WeatherContainer from "./components/WeatherContainer";
-import {Units} from "./store/weather";
+import {Locale, Units} from "./store/weather";
 
 const App = () => {
     const initialPlace = 'Moscow'
@@ -8,7 +8,7 @@ const App = () => {
 
     return (
         <>
-            <WeatherContainer  APIKey={APIKey} initialPlace={initialPlace} units={Units.Metric}/>
+            <WeatherContainer  APIKey={APIKey} initialPlace={initialPlace} units={Units.Metric} locale={Locale.US}/>
         </>
     );
 };

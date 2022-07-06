@@ -1,14 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Locale, Units, useMultiple, useSingle} from "../store/weather";
 import shallow from "zustand/shallow";
+import cn from 'classnames'
 
 interface WeatherProps {
     initialPlace: string,
     APIKey: string,
-    units: string
+    units?: string,
+    locale?: string
 }
 
-const WeatherContainer: React.FC<WeatherProps> = ({initialPlace, APIKey, units}) => {
+const WeatherContainer: React.FC<WeatherProps> = ({
+                                                      initialPlace,
+                                                      APIKey,
+                                                      units = Units.Metric,
+                                                      locale = Locale.US
+                                                  }) => {
     const {singleDay, isLoadingDay, isErrorDay, fetchDay} = useSingle((state) => ({
         singleDay: state.data,
         isLoadingDay: state.isLoading,
@@ -24,10 +31,9 @@ const WeatherContainer: React.FC<WeatherProps> = ({initialPlace, APIKey, units})
 
     useEffect(() => {
         fetchDay(APIKey, initialPlace, units)
-        fetchDays(APIKey, initialPlace, units, 5)
     }, [])
 
-    function returnDate(locale: string, isShort: boolean) {
+    function returnDate(locale: string, isShort?: boolean) {
         const now = new Date()
         const US = {
             days: isShort
@@ -48,17 +54,31 @@ const WeatherContainer: React.FC<WeatherProps> = ({initialPlace, APIKey, units})
 
         switch (locale) {
             case Locale.RU:
-                return `${RU.days[now.getDay()]} ${now.getDate()}  ${RU.month[now.getMonth()]}`
+                return `${RU.days[now.getDay()]} ${now.getDate()} ${RU.month[now.getMonth()]}`
             case Locale.US:
-                return `${US.days[now.getDay()]} ${now.getDate()}  ${US.month[now.getMonth()]}`
-            default:
-                console.log('Locale not found')
-                break
+                return `${US.days[now.getDay()]} ${now.getDate()} ${US.month[now.getMonth()]}`
         }
     }
 
+    function timeStamp(date: string) {
+        const array = date.split(' ')
+        const day = array[0].split('-')
+        const hours = array[1].split(':')[0]
+
+        return `${day[2]}.${day[1]}  ${hours.split('')[0] === '0' ? hours.split('')[1] : hours}h`
+    }
+
     // console.log(data)
-    console.log(severalDays)
+    // console.log(severalDays)
+
+    const [showDays, setShowDays] = useState(false)
+    const handleFetchDays = () => {
+        if (severalDays.length === 0) {
+            fetchDays(APIKey, initialPlace, units, 5)
+        }
+
+        setShowDays(!showDays)
+    }
 
     return (
         singleDay &&
@@ -70,7 +90,7 @@ const WeatherContainer: React.FC<WeatherProps> = ({initialPlace, APIKey, units})
 
                 <div>
                     <div className='day'>
-                        {returnDate(Locale.US, false)}
+                        {returnDate(Locale.US)}
                     </div>
 
                     <div className='condition'>
@@ -81,14 +101,22 @@ const WeatherContainer: React.FC<WeatherProps> = ({initialPlace, APIKey, units})
                 </div>
             </div>
 
+            <div onClick={handleFetchDays}
+                 className={cn('toggler', {['toggle']: showDays})}>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwMfiUfLmdh-V_Ecl-zpTijsoBZyz4zT9Ufg&usqp=CAU"
+                    alt=""/>
+            </div>
             {
                 severalDays &&
-                <div className="additional">
+                <div className={cn('additional', {['show']: showDays})}>
                     {severalDays.list?.map((day: any) => (
                         <div key={day.dt}
                              className='additional-day'>
                             <p className='temperature'>{Math.round(day.main.temp)}</p>
                             <p className='description'>{day.weather[0].main}</p>
+                            <p className='test'>
+                                {timeStamp(day.dt_txt)}
+                            </p>
                         </div>
                     ))}
                 </div>

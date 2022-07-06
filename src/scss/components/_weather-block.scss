@@ -47,6 +47,12 @@
     justify-content: space-between;
     flex-wrap: wrap;
     margin-top: 8px;
+    opacity: 0;
+    transition: opacity .2s;
+
+    &.show {
+      opacity: 1;
+    }
 
     &-day {
       width: 20%;
@@ -62,5 +68,30 @@
     .description {
       font-size: 12px;
     }
+  }
+}
+
+.test {
+  font-size: 10px;
+  margin-bottom: 16px;
+}
+
+.toggler {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 12px;
+  width: 12px;
+  transform: rotate(-90deg);
+  margin-left: auto;
+  transition: transform .2s;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &.toggle {
+    transform: rotate(90deg);
   }
 }
