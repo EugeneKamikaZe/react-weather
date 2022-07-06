@@ -3,12 +3,13 @@
   "private": true,
   "description": "weather widget",
   "version": "0.0.1",
-  "homepage": "https://EugeneKamikaZe.github.io/react-weather",
+  "homepage": "https://eugenekamikaze.github.io/react-weather/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -b master -d dist"
+    "deploy": "gh-pages -b master -d dist",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "react": "^18.0.0",
