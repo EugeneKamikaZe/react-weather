@@ -1,5 +1,0 @@
-# Project exclude paths
-/node_modules/
-/package-lock.json
-/.idea
-/dist/
