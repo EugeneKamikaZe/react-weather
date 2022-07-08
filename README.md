@@ -1,6 +1,9 @@
 # Animated React weather widget
 
-App used [openweathermap](https://openweathermap.org/) API
+Api used 
+- [openweathermap](https://openweathermap.org/): weather query for the day and for the coming days
+- [geocode](https://openweathermap.org/api/geocoding-api): transformation of any location name into geographical coordinates, and the other way around (reverse geocoding)
+- [sunrise - sunset](https://sunrise-sunset.org/api):  API that provides sunset and sunrise times for a given latitude and longitude
 
 ### Reference
 
