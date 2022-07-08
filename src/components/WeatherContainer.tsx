@@ -33,6 +33,8 @@ const WeatherContainer: React.FC<WeatherProps> = ({
         fetchDay(APIKey, initialPlace, units)
     }, [])
 
+    console.log(singleDay)
+
     function returnDate(locale: string, isShort?: boolean) {
         const now = new Date()
         const US = {
