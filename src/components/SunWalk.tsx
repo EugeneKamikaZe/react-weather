@@ -22,9 +22,8 @@ const SunWalk = () => {
 
     if (data) {
         const sunWalkStatus = sunMove(data.results.sunrise, data.results.solar_noon, data.results.sunset, 230)
-        console.log(sunWalkStatus)
         const sunStyle = {
-            transform: `translateY(-${sunWalkStatus.walkStep}%)`,
+            transform: `translateY(-${sunWalkStatus}%)`,
         }
 
         // setInterval(() => {

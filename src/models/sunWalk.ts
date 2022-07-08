@@ -1,11 +1,3 @@
-import {createLogger} from "vite";
-
-interface SunWalkProps {
-    walkStep: number,
-    isSunrise: boolean,
-    isSunset: boolean,
-}
-
 enum timeFormat {
     days = 'days',
     hours = 'hours',
@@ -33,40 +25,28 @@ function calculateWalk(now: Date, min: Date, max: Date, maxValue: number) {
     )
 }
 
-export function sunMove(sunrise: string, solarNoon: string, sunset: string, maxValue: number): SunWalkProps {
+export function sunMove(sunrise: string, solarNoon: string, sunset: string, maxValue: number): number {
     const sunriseTime = new Date(sunrise)
     const sunsetTime = new Date(sunset)
     const solarNoonTime = new Date(solarNoon)
     const now = new Date()
 
-    const result = {
-        walkStep: 0,
-        isSunrise: false,
-        isSunset: false,
-    }
+    let result = 0
 
     // Sunrise
     if (now > sunriseTime && now <= solarNoonTime) {
         const timeToEnd = solarNoonTime.getTime() - now.getTime()
-
-        console.log('###### Солнце восходит #######')
         console.log('Солнце взойдет в зенит через', getHumanTime(timeToEnd, timeFormat.hours), 'часa(/ов)', getHumanTime(timeToEnd, timeFormat.minutes), 'минут', `(${now.getHours()}:${now.getMinutes()})`)
 
-        result.isSunrise = true
-
-        result.walkStep = calculateWalk(now, sunriseTime, solarNoonTime, maxValue)
+        result = calculateWalk(now, sunriseTime, solarNoonTime, maxValue)
     }
 
     // Sunset
     if (now > solarNoonTime && now < sunsetTime) {
         const timeToEnd = sunsetTime.getTime() - now.getTime()
-
-        console.log('###### Солнце заходит #######')
         console.log('Солнце зайдет через', getHumanTime(timeToEnd, timeFormat.hours), 'часa(/ов)', getHumanTime(timeToEnd, timeFormat.minutes), 'минут', `(${now.getHours()}:${now.getMinutes()})`)
 
-        result.isSunset = true
-
-        result.walkStep = calculateWalk(now, solarNoonTime, sunsetTime, maxValue)
+        result = maxValue - calculateWalk(now, solarNoonTime, sunsetTime, maxValue)
     }
 
     // if (now > sunsetTime && now < sunriseTime) {
