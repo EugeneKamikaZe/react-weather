@@ -1,24 +1,23 @@
 import create from 'zustand'
 import axios from "axios";
 
-interface SunriseProps {
+interface GeocodeProps {
     data: null | any,
     isLoading: boolean,
     isError: string,
-    fetch: (lat: number, lng: number, date?: string) => void
+    fetch: (key: string, place: string, limit?: number) => void
 }
 
-export const useSunrise = create<SunriseProps>((set) => ({
+export const useGeocode = create<GeocodeProps>((set) => ({
     data: null,
     isLoading: true,
     isError: '',
-    fetch: async (lat, lng, date = 'today') => {
+    fetch: async (APIKey, initialPlace, limit = 5) => {
         try {
-            const sunriseSunsetAPI = 'https://api.sunrise-sunset.org/json'
+            const weatherAPI = 'http://api.openweathermap.org/geo/1.0/direct'
             const response = await axios.get(
-                `${sunriseSunsetAPI}?lat=${lat}&lng=${lng}
-                ${date ? '&date=' + date : '&date=today'}
-                &formatted=0`)
+                `${weatherAPI}?q=${initialPlace}&appid=${APIKey}&limit=${limit}`
+            )
 
             set(() => ({
                 data: response.data,
@@ -32,5 +31,3 @@ export const useSunrise = create<SunriseProps>((set) => ({
         }
     },
 }))
-
-

@@ -5,7 +5,11 @@ interface WeatherProps {
     data: null | any,
     isLoading: boolean,
     isError: string,
-    fetch: (key: string, place: string, units: string, days?: number) => void
+    fetch: (key: string,
+            lat: number,
+            lng: number,
+            units?: string,
+            days?: number) => void
 }
 
 export enum Locale {
@@ -22,11 +26,11 @@ export const useSingle = create<WeatherProps>((set) => ({
     data: null,
     isLoading: true,
     isError: '',
-    fetch: async (APIKey, initialPlace, units = 'metric') => {
+    fetch: async (APIKey, lat, lng, units = 'metric') => {
         try {
             const weatherAPI = 'https://api.openweathermap.org/data/2.5/weather'
             const response = await axios.get(
-                `${weatherAPI}?q=${initialPlace}&appid=${APIKey}&units=${units}`
+                `${weatherAPI}?lat=${lat}&lon=${lng}&appid=${APIKey}&units=${units}`
             )
 
             set(() => ({
@@ -46,11 +50,11 @@ export const useMultiple = create<WeatherProps>((set) => ({
     data: [],
     isLoading: true,
     isError: '',
-    fetch: async (APIKey, initialPlace, units = 'metric', days = 7) => {
+    fetch: async (APIKey, lat, lng, units = 'metric', days = 7) => {
         try {
             const weatherAPI = 'https://api.openweathermap.org/data/2.5/forecast'
             const response = await axios.get(
-                `${weatherAPI}?q=${initialPlace}&cnt=${days}&appid=${APIKey}&units=${units}`
+                `${weatherAPI}?q=${lat}&lon=${lng}&cnt=${days}&appid=${APIKey}&units=${units}`
             )
 
             set(() => ({

@@ -4,10 +4,12 @@ import {useSunrise} from "../store/sunrise-sunset";
 import shallow from "zustand/shallow";
 import {sunMove} from "../models/sunWalk";
 
-const lat = '55.751244'
-const lng = '37.618423'
+interface GeoProps {
+    lat: number,
+    lng: number
+}
 
-const SunWalk = () => {
+const SunWalk: React.FC<GeoProps> = ({lat, lng}) => {
     const {data, isLoading, isError, fetch} = useSunrise((state) => ({
         data: state.data,
         isLoading: state.isLoading,
@@ -19,9 +21,8 @@ const SunWalk = () => {
         fetch(lat, lng)
     }, [])
 
-
     if (data) {
-        const sunWalkStatus = sunMove(data.results.sunrise, data.results.solar_noon, data.results.sunset, 230)
+        const sunWalkStatus = sunMove(data.results.sunrise, data.results.solar_noon, data.results.sunset, 200)
         const sunStyle = {
             transform: `translateY(-${sunWalkStatus}%)`,
         }
