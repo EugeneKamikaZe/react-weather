@@ -1,0 +1,49 @@
+.select {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.divider {
+  font-weight: 400;
+  margin: 0 auto 16px;
+}
+
+.input {
+  display: block;
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 100%;
+    padding: 4px 8px;
+  }
+}
+
+.submit {
+  padding: 4px 8px;
+  font-size: 12px;
+  margin-top: 8px;
+  width: fit-content;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 4px;
+  gap: 8px;
+
+  &-item {
+    background-color: red;
+    border: 1px solid #000;
+  }
+}

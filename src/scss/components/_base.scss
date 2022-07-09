@@ -7,17 +7,7 @@
 }
 
 body {
-  height: 100vh;
-  background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: $base-font;
   font-weight: 300;
   font-size: 16px;
-}
-
-#root {
-  width: 300px;
-  height: 380px;
 }

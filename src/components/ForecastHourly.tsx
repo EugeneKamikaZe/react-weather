@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
-import {Locale, Units, useMultiple} from "../store/weather";
+import {Locale, Units, useHourlyForecast} from "../store/weather";
 import cn from "classnames";
 import shallow from "zustand/shallow";
 import {WeatherProps} from "./Forecast";
 
 const ForecastHourly: React.FC<WeatherProps> = ({
-                            initialPlace,
-                            APIKey,
-                            units = Units.Metric,
-                            locale = Locale.US
-                        }) => {
-    const {severalDays, isLoadingDays, isErrorDays, fetchDays} = useMultiple((state) => ({
-        severalDays: state.data,
-        isLoadingDays: state.isLoading,
-        isErrorDays: state.isError,
-        fetchDays: state.fetch,
+                                                    APIKey,
+                                                    lat,
+                                                    lng,
+                                                    units = Units.Metric,
+                                                    locale = Locale.US
+                                                }) => {
+    const {data, isLoading, isError, fetch} = useHourlyForecast((state) => ({
+        data: state.data,
+        isLoading: state.isLoading,
+        isError: state.isError,
+        fetch: state.fetch,
     }), shallow)
-
 
 
     function timeStamp(date: string) {
@@ -32,8 +32,8 @@ const ForecastHourly: React.FC<WeatherProps> = ({
 
     const [showDays, setShowDays] = useState(false)
     const handleFetchDays = () => {
-        if (severalDays.length === 0) {
-            fetchDays(APIKey, initialPlace, units, 5)
+        if (data.length === 0) {
+            fetch(APIKey, lat, lng, units, 5)
         }
 
         setShowDays(!showDays)
@@ -45,12 +45,13 @@ const ForecastHourly: React.FC<WeatherProps> = ({
 
             <div onClick={handleFetchDays}
                  className={cn('toggler', {['toggle']: showDays})}>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwMfiUfLmdh-V_Ecl-zpTijsoBZyz4zT9Ufg&usqp=CAU"
-                     alt=""/>
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwMfiUfLmdh-V_Ecl-zpTijsoBZyz4zT9Ufg&usqp=CAU"
+                    alt=""/>
             </div>
             {
                 <div className={cn('additional', {['show']: showDays})}>
-                    {severalDays.list?.map((day: any) => (
+                    {data.list?.map((day: any) => (
                         <div key={day.dt}
                              className='additional-day'>
                             <p className='temperature'>{Math.round(day.main.temp)}</p>

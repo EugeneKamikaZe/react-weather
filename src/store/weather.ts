@@ -6,8 +6,8 @@ interface WeatherProps {
     isLoading: boolean,
     isError: string,
     fetch: (key: string,
-            lat: number,
-            lng: number,
+            lat: string,
+            lng: string,
             units?: string,
             days?: number) => void
 }
@@ -22,7 +22,7 @@ export enum Units {
     Imperial = 'imperial'
 }
 
-export const useSingle = create<WeatherProps>((set) => ({
+export const useDayForecast = create<WeatherProps>((set) => ({
     data: null,
     isLoading: true,
     isError: '',
@@ -46,7 +46,7 @@ export const useSingle = create<WeatherProps>((set) => ({
     },
 }))
 
-export const useMultiple = create<WeatherProps>((set) => ({
+export const useHourlyForecast = create<WeatherProps>((set) => ({
     data: [],
     isLoading: true,
     isError: '',
@@ -54,7 +54,7 @@ export const useMultiple = create<WeatherProps>((set) => ({
         try {
             const weatherAPI = 'https://api.openweathermap.org/data/2.5/forecast'
             const response = await axios.get(
-                `${weatherAPI}?q=${lat}&lon=${lng}&cnt=${days}&appid=${APIKey}&units=${units}`
+                `${weatherAPI}?lat=${lat}&lon=${lng}&cnt=${days}&appid=${APIKey}&units=${units}`
             )
 
             set(() => ({

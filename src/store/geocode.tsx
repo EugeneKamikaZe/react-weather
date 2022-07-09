@@ -8,6 +8,13 @@ interface GeocodeProps {
     fetch: (key: string, place: string, limit?: number) => void
 }
 
+// TODO дописать интерфейс
+interface PositionProps {
+    lat: string,
+    lng: string,
+    selectCity: (key: any) => void
+}
+
 export const useGeocode = create<GeocodeProps>((set) => ({
     data: null,
     isLoading: true,
@@ -30,4 +37,14 @@ export const useGeocode = create<GeocodeProps>((set) => ({
             }))
         }
     },
+}))
+
+// TODO дописать интерфейс
+export const useCity = create<PositionProps>((set) => ({
+    lat: '',
+    lng: '',
+    selectCity: (city: any) => set({
+        lat: city.lat,
+        lng: city.lon,
+    })
 }))
