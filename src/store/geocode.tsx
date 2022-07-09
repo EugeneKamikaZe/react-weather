@@ -21,7 +21,7 @@ export const useGeocode = create<GeocodeProps>((set) => ({
     isError: '',
     fetch: async (APIKey, initialPlace, limit = 5) => {
         try {
-            const weatherAPI = 'http://api.openweathermap.org/geo/1.0/direct'
+            const weatherAPI = 'https://api.openweathermap.org/geo/1.0/direct'
             const response = await axios.get(
                 `${weatherAPI}?q=${initialPlace}&appid=${APIKey}&limit=${limit}`
             )
