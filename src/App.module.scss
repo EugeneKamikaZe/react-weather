@@ -1,5 +1,6 @@
 .wrapper {
   display: flex;
+  flex-wrap: wrap;
   padding: 32px;
   gap: 32px;
   height: 100vh;
@@ -9,4 +10,8 @@
 .block {
   width: 300px;
   height: 400px;
+}
+
+.select {
+  height: auto;
 }

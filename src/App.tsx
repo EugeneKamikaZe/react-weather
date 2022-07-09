@@ -7,6 +7,7 @@ import {useCity, useGeocode} from "./store/geocode";
 
 import s from './App.module.scss'
 import SelectCity from "./components/SelectCity";
+import cn from "classnames";
 
 const APIKey = '46c7e8ffbbf9ba21fe33df6625f2ec10'
 
@@ -18,7 +19,7 @@ const App = () => {
 
     return (
         <div className={s.wrapper}>
-            <div className={s.block}>
+            <div className={cn(s.block, s.select)}>
                 <SelectCity APIKey={APIKey}/>
             </div>
 
