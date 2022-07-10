@@ -9,7 +9,7 @@ interface SunriseProps {
     data: null | {[key: string]: SunriseResultProps},
     isLoading: boolean,
     isError: string,
-    fetch: (lat: string, lng: string, date?: string) => void
+    fetch: (lat: number, lng: number, date?: string) => void
 }
 
 export const useSunrise = create<SunriseProps>((set) => ({

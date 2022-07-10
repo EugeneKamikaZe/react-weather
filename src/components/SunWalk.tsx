@@ -6,8 +6,8 @@ import {sunMove} from "../models/sunWalk";
 import {useCity} from "../store/geocode";
 
 interface GeoProps {
-    lat: string,
-    lng: string
+    lat: number,
+    lng: number
 }
 
 const SunWalk: React.FC<GeoProps> = ({lat, lng}) => {

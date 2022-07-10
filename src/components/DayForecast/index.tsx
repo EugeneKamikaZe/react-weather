@@ -7,8 +7,8 @@ import s from './style.module.scss'
 
 export interface WeatherProps {
     APIKey: string,
-    lat: string,
-    lng: string,
+    lat: number,
+    lng: number,
     units?: string,
     locale?: string
 }

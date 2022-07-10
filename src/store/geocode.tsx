@@ -10,8 +10,8 @@ interface GeocodeProps {
 }
 
 interface PositionProps {
-    lat: string,
-    lng: string,
+    lat: number | null,
+    lng: number | null,
     selectCity: (key: CityProps) => void
 }
 
@@ -40,8 +40,8 @@ export const useGeocode = create<GeocodeProps>((set) => ({
 }))
 
 export const useCity = create<PositionProps>((set) => ({
-    lat: '',
-    lng: '',
+    lat: null,
+    lng: null,
     selectCity: (city) => set({
         lat: city.lat,
         lng: city.lon,

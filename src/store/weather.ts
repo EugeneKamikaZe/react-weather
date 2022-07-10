@@ -19,8 +19,8 @@ interface WeatherProps {
     isLoading: boolean,
     isError: string,
     fetch: (key: string,
-            lat: string,
-            lng: string,
+            lat: number,
+            lng: number,
             units?: string,
             days?: number) => void
 }
