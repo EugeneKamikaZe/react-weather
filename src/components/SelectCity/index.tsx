@@ -14,8 +14,8 @@ interface SelectProps {
 
 export interface CityProps {
     country: string,
-    lat: string | undefined,
-    lon: string | undefined,
+    lat: number,
+    lon: number,
     name: string,
     state: string,
     local_names: { [key: string]: string }
@@ -29,6 +29,7 @@ const SelectCity: React.FC<SelectProps> = ({APIKey}) => {
         fetch: state.fetch,
     }), shallow)
     const selectCity = useCity((state) => state.selectCity)
+    const randomCity = capitalCity()
 
     const [place, setPlace] = useState(() => {
         return {
@@ -48,23 +49,26 @@ const SelectCity: React.FC<SelectProps> = ({APIKey}) => {
 
     const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault()
-        fetch(APIKey, place.city)
-        setHide(false)
+        if (place.city.length === 0) {
+            fetch(APIKey, randomCity)
+        } else {
+            fetch(APIKey, place.city)
+        }
+
+        // setHide(false)
     }
 
     const [hide, setHide] = useState(false)
+    const [selected, setSelected] = useState(0)
     const handleSelect = (city: CityProps) => {
         selectCity(city)
+        setSelected(city.lat)
         // setHide(true)
     }
 
-    // useEffect(() => {
-    //     randomCity()
-    // }, [])
-
-    if (data) {
-        console.log(data)
-    }
+    // if (data) {
+    //     console.log(data)
+    // }
 
     return (
         <div className={s.select}>
@@ -72,7 +76,7 @@ const SelectCity: React.FC<SelectProps> = ({APIKey}) => {
                 <Input className='input'
                        id='city'
                        labelText='Select City:'
-                       placeholder={capitalCity()}
+                       placeholder={randomCity}
                        handleChange={handleChange}/>
 
                 <input className={cn('btn', 'btn-primary', s.btnSubmit)}
@@ -89,6 +93,7 @@ const SelectCity: React.FC<SelectProps> = ({APIKey}) => {
                     {
                         data.map((item: CityProps) => <SelectItem item={item}
                                                                   onSelect={handleSelect}
+                                                                  current={selected}
                                                                   key={item.lat}/>)
                     }
                 </div>

@@ -26,4 +26,9 @@
   &-submit {
     margin-top: 24px;
   }
+  
+  &.disabled {
+    opacity: .5;
+    cursor: default;
+  }
 }

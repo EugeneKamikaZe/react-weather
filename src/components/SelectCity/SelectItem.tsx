@@ -7,27 +7,27 @@ import cn from "classnames";
 
 interface SelectProps {
     item: CityProps,
-    onSelect: (item: CityProps) => void
+    onSelect: (item: CityProps) => void,
+    className?: string,
+    current: number
 }
 
-const SelectItem: React.FC<SelectProps> = ({item, onSelect}) => {
+const SelectItem: React.FC<SelectProps> = ({item, onSelect, current}) => {
     const [isShow, setIsShow] = useState(false)
-    const [isSelected, setIsSelected] = useState(false)
-    const resultItem = useRef(null)
 
     const handleShow = () => {
         setIsShow(!isShow)
     }
 
-    const handleSelect = (e: SyntheticEvent) => {
-        e.stopPropagation()
-        // setIsSelected(!isSelected)
+    const handleSelect = (item: CityProps) => {
         onSelect(item)
     }
 
+    const selected = current === item.lat
+
     return (
         <>
-            <div className={cn(s.resultItem, {[s.selected]: isSelected})}
+            <div className={cn(s.resultItem, {[s.selected]: selected})}
                  key={item.lat}
                  onClick={handleShow}>
                 <div className={s.resultItem_info}>
@@ -36,15 +36,19 @@ const SelectItem: React.FC<SelectProps> = ({item, onSelect}) => {
                              src={Toggle}
                              alt="toggle"/>
                     </p>
-                    <button className='btn btn-xs'
-                            onClick={handleSelect}>Select
+                    <button className={cn('btn', 'btn-xs', {['disabled']: selected})}
+                            disabled={selected}
+                            onClick={(e: SyntheticEvent) => {
+                                e.stopPropagation()
+                                handleSelect(item)
+                            }}>{selected ? 'Selected' : 'Select'}
                     </button>
                 </div>
 
                 <div className={cn({[s.show]: isShow}, s.resultItem_additional)}>
-                    <p>State: {item.state}</p>
-                    <p>Latitude: {item.lat}</p>
-                    <p>Longitude: {item.lon}</p>
+                    {item.state && <p><span>State:</span> {item.state}</p>}
+                    <p><span>Latitude:</span> {item.lat}</p>
+                    <p><span>Longitude:</span> {item.lon}</p>
                 </div>
             </div>
         </>
