@@ -1,5 +1,5 @@
 import React from 'react';
-import Forecast, {WeatherProps} from "./Forecast";
+import DayForecast, {WeatherProps} from "./DayForecast";
 
 const WeatherContainer: React.FC<WeatherProps> = ({
                                                       APIKey,
@@ -11,7 +11,7 @@ const WeatherContainer: React.FC<WeatherProps> = ({
 
     return (
         <>
-            <Forecast lat={lat} lng={lng} APIKey={APIKey}/>
+            <DayForecast lat={lat} lng={lng} APIKey={APIKey}/>
         </>
     );
 };

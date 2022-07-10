@@ -1,18 +1,18 @@
 import create from 'zustand'
 import axios from "axios";
+import {CityProps} from "../components/SelectCity";
 
 interface GeocodeProps {
-    data: null | any,
+    data: null | CityProps[],
     isLoading: boolean,
     isError: string,
     fetch: (key: string, place: string, limit?: number) => void
 }
 
-// TODO дописать интерфейс
 interface PositionProps {
     lat: string,
     lng: string,
-    selectCity: (key: any) => void
+    selectCity: (key: CityProps) => void
 }
 
 export const useGeocode = create<GeocodeProps>((set) => ({
@@ -39,11 +39,10 @@ export const useGeocode = create<GeocodeProps>((set) => ({
     },
 }))
 
-// TODO дописать интерфейс
 export const useCity = create<PositionProps>((set) => ({
     lat: '',
     lng: '',
-    selectCity: (city: any) => set({
+    selectCity: (city) => set({
         lat: city.lat,
         lng: city.lon,
     })

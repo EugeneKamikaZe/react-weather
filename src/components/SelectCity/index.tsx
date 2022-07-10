@@ -1,12 +1,24 @@
-import React, {ChangeEvent, SyntheticEvent, useState} from 'react';
+import React, {ChangeEvent, SyntheticEvent, useEffect, useState} from 'react';
 import {useCity, useGeocode} from "../../store/geocode";
 import shallow from "zustand/shallow";
+import Input from "../Input";
 
 import s from './style.module.scss'
-import Input from "../Input";
+import SelectItem from "./SelectItem";
+import cn from "classnames";
+import capitalCity from "../../models/randomCity";
 
 interface SelectProps {
     APIKey: string,
+}
+
+export interface CityProps {
+    country: string,
+    lat: string | undefined,
+    lon: string | undefined,
+    name: string,
+    state: string,
+    local_names: { [key: string]: string }
 }
 
 const SelectCity: React.FC<SelectProps> = ({APIKey}) => {
@@ -41,50 +53,48 @@ const SelectCity: React.FC<SelectProps> = ({APIKey}) => {
     }
 
     const [hide, setHide] = useState(false)
-    // TODO change props
-    const handleSelect = (city: any) => {
+    const handleSelect = (city: CityProps) => {
         selectCity(city)
-        setHide(true)
+        // setHide(true)
+    }
+
+    // useEffect(() => {
+    //     randomCity()
+    // }, [])
+
+    if (data) {
+        console.log(data)
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit}
-                  className={s.select}>
-                <Input className={s.input} id='city' labelText='City:' handleChange={handleChange}/>
+        <div className={s.select}>
+            <form onSubmit={handleSubmit}>
+                <Input className='input'
+                       id='city'
+                       labelText='Select City:'
+                       placeholder={capitalCity()}
+                       handleChange={handleChange}/>
 
-                <span className={s.divider}>Or</span>
-
-                <Input className={s.input} id='lat' labelText='Latitude:' handleChange={handleChange}/>
-                <Input className={s.input} id='lng' labelText='Longitude:' handleChange={handleChange}/>
-
-                <input className={s.submit} type="submit" value="Submit"/>
+                <input className={cn('btn', 'btn-primary', s.btnSubmit)}
+                       type="submit"
+                       value="Search"/>
             </form>
 
             {
-                data && !hide && <div className={s.result}>
+                data?.length === 0 && <p className={s.emptyResult}>Nothing Found</p>
+            }
+
+            {
+                data && data.length > 0 && !hide && <div className={s.result}>
                     {
-                        // TODO дописать интерфейс
-                        data.map((item: any) => (
-                            <div className={s.resultItem}
-                                 key={item.lat}>
-                                <p>Country: {item.country}</p>
-                                <p>City: {item.name}</p>
-                                <p>State: {item.state}</p>
-
-                                <div>
-                                    <p>Latitude: {item.lat}</p>
-                                    <p>Longitude: {item.lon}</p>
-                                </div>
-
-                                <button onClick={() => handleSelect(item)}>Select</button>
-                            </div>
-                        ))
+                        data.map((item: CityProps) => <SelectItem item={item}
+                                                                  onSelect={handleSelect}
+                                                                  key={item.lat}/>)
                     }
                 </div>
             }
-        </>
-    );
-};
+        </div>
+    )
+}
 
-export default SelectCity;
+export default SelectCity

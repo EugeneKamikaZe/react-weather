@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
-import {Locale, Units, useDayForecast} from "../store/weather";
+import {Locale, Units, useDayForecast} from "../../store/weather";
 import shallow from "zustand/shallow";
-import returnDate from "../models/returnDate";
+import returnDate from "../../models/returnDate";
+
+import s from './style.module.scss'
 
 export interface WeatherProps {
     APIKey: string,
@@ -11,7 +13,7 @@ export interface WeatherProps {
     locale?: string
 }
 
-const Forecast: React.FC<WeatherProps> = ({
+const DayForecast: React.FC<WeatherProps> = ({
                                               APIKey,
                                               lat,
                                               lng,
@@ -31,22 +33,19 @@ const Forecast: React.FC<WeatherProps> = ({
         }
     }, [lat])
 
-
-    // console.log(data)
-
     return data && (
         <div className='weather'>
-            <div className="header">
-                <div className='temperature'>
+            <div className={s.header}>
+                <div className={s.temperature}>
                     {Math.round(data.main.temp)}
                 </div>
 
                 <div>
-                    <div className='day'>
+                    <div className={s.day}>
                         {returnDate(Locale.US)}
                     </div>
 
-                    <div className='condition'>
+                    <div className={s.condition}>
                         {data.weather.map((item: any) => (
                             <p key={item.id}>{item.main}</p>
                         ))}
@@ -57,4 +56,4 @@ const Forecast: React.FC<WeatherProps> = ({
     );
 };
 
-export default Forecast;
+export default DayForecast;

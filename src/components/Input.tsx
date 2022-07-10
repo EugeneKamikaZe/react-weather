@@ -6,7 +6,8 @@ interface IFormInput {
     value?: string,
     type?: string,
     handleChange: ChangeEventHandler<HTMLElement>,
-    className?: string
+    className?: string,
+    placeholder?: string | undefined
 }
 
 const FormInput: React.FC<IFormInput> = ({
@@ -15,7 +16,8 @@ const FormInput: React.FC<IFormInput> = ({
                                              type = 'text',
                                              value,
                                              handleChange,
-                                             className
+                                             className,
+                                             placeholder
                                          }) => {
     return (
         <div className={className}>
@@ -27,6 +29,7 @@ const FormInput: React.FC<IFormInput> = ({
                    name={id}
                    value={value}
                    onChange={handleChange}
+                   placeholder={placeholder}
             />
         </div>
     );

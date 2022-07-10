@@ -1,8 +1,12 @@
 import create from 'zustand'
 import axios from "axios";
 
+type SunriseResultProps = {
+    [key: string]: string
+}
+
 interface SunriseProps {
-    data: null | any,
+    data: null | {[key: string]: SunriseResultProps},
     isLoading: boolean,
     isError: string,
     fetch: (lat: string, lng: string, date?: string) => void
