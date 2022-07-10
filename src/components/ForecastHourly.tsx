@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 // import {Locale, Units, useHourlyForecast} from "../store/weather";
 // import cn from "classnames";
 // import shallow from "zustand/shallow";

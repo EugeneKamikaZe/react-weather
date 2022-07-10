@@ -1,6 +1,26 @@
-$base-font: 'Inter', sans-serif !default;
+$base-size: 16px !default;
 
 //Colors
-$default__color: #000 !default;
-$yellow: #FFD80A !default;
-$green: #64DC00 !default;
+$default-color: #091e42 !default;
+$white: #fff !default;
+$yellow: #ffd80a !default;
+$green: #64dc00 !default;
+$placeholder: #8c8c8c !default;
+$gray: #ccc8c8 !default;
+
+//Box Shadows
+$box-shadow-default: 0 0 4px rgba($default-color, 15%) !default;
+$box-shadow-selected: 0 0 10px rgba($default-color, 20%) !default;
+
+//Fonts
+$base-font: 'Inter', sans-serif !default;
+
+$font-size-default: 1em !default;
+
+//Headings
+$h1-fw: 5rem !default;
+$h2-fw: 3.375rem !default;
+$h3-fw: 2.25rem !default;
+$h4-fw: 1.5rem !default;
+$h5-fw: 1rem !default;
+$h6-fw: 0.625rem !default;

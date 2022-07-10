@@ -1,6 +1,8 @@
+@import "src/scss/utilites/variables";
+
 .select {
   padding: 24px;
-  background-color: #fff;
+  background-color: $white;
   border-radius: 4px;
 }
 
@@ -17,13 +19,13 @@
 
 .resultItem {
   border-radius: 4px;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: $box-shadow-default;
   font-size: 12px;
   font-weight: 400;
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(#CCC8C8, 15%);
+    background-color: rgba($gray, 15%);
   }
 
   &_info {
@@ -46,7 +48,7 @@
 
     span {
       margin-right: 4px;
-      color: #626262;
+      color: $placeholder;
     }
   }
 }
@@ -64,8 +66,8 @@
 }
 
 .selected {
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.20);
-  background-color: rgba(#CCC8C8, 15%);
+  box-shadow: $box-shadow-selected;
+  background-color: rgba($gray, 15%);
 }
 
 .emptyResult {

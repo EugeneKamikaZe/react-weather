@@ -1,15 +1,11 @@
 .btn {
-  color: $default__color;
+  color: $default-color;
   line-height: 1;
   font-weight: 400;
   outline: none;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-
-  &:not(&-xs) {
-
-  }
 
   &-xs {
     padding: 4px 8px;
@@ -26,9 +22,9 @@
   &-submit {
     margin-top: 24px;
   }
-  
+
   &.disabled {
-    opacity: .5;
+    opacity: 0.5;
     cursor: default;
   }
 }
