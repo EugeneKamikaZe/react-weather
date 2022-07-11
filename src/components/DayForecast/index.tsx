@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {Locale, Units, useDayForecast} from '../../store/weather';
+import React, { useEffect } from 'react';
+import { Locale, Units, useDayForecast } from '../../store/weather';
 import shallow from 'zustand/shallow';
 import returnDate from '../../models/returnDate';
 
@@ -14,13 +14,14 @@ export interface WeatherProps {
 }
 
 const DayForecast: React.FC<WeatherProps> = ({
-                                                 APIKey,
-                                                 lat,
-                                                 lng,
-                                                 units = Units.Metric,
-                                                 locale = Locale.US,
-                                             }) => {
-    const {data, isLoading, isError, fetch} = useDayForecast((state) => ({
+    APIKey,
+    lat,
+    lng,
+    units = Units.Metric,
+    locale = Locale.US,
+}) => {
+    const { data, isLoading, isError, fetch } = useDayForecast(
+        (state) => ({
             data: state.data,
             isLoading: state.isLoading,
             isError: state.isError,

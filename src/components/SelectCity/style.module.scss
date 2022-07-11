@@ -1,75 +1,75 @@
-@import "src/scss/utilites/variables";
+@import 'src/scss/utilites/variables';
 
 .select {
-  padding: 24px;
-  background-color: $white;
-  border-radius: 4px;
+    padding: 24px;
+    background-color: $white;
+    border-radius: 4px;
 }
 
 .btnSubmit {
-  margin-top: 8px;
+    margin-top: 8px;
 }
 
 .result {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
 }
 
 .resultItem {
-  border-radius: 4px;
-  box-shadow: $box-shadow-default;
-  font-size: 12px;
-  font-weight: 400;
-  cursor: pointer;
+    border-radius: 4px;
+    box-shadow: $box-shadow-default;
+    font-size: 12px;
+    font-weight: 400;
+    cursor: pointer;
 
-  &:hover {
-    background-color: rgba($gray, 15%);
-  }
-
-  &_info {
-    min-height: 40px;
-    padding: 8px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &_additional {
-    display: none;
-    padding: 0 16px 16px;
-    flex-direction: column;
-    gap: 4px;
-
-    &.show {
-      display: flex;
+    &:hover {
+        background-color: rgba($gray, 15%);
     }
 
-    span {
-      margin-right: 4px;
-      color: $placeholder;
+    &_info {
+        min-height: 40px;
+        padding: 8px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
-  }
+
+    &_additional {
+        display: none;
+        padding: 0 16px 16px;
+        flex-direction: column;
+        gap: 4px;
+
+        &.show {
+            display: flex;
+        }
+
+        span {
+            margin-right: 4px;
+            color: $placeholder;
+        }
+    }
 }
 
 .textWToggle {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 
-  img {
-    &:not(.show) {
-      transform: rotate(180deg);
+    img {
+        &:not(.show) {
+            transform: rotate(180deg);
+        }
     }
-  }
 }
 
 .selected {
-  box-shadow: $box-shadow-selected;
-  background-color: rgba($gray, 15%);
+    box-shadow: $box-shadow-selected;
+    background-color: rgba($gray, 15%);
 }
 
 .emptyResult {
-  margin-top: 32px;
+    margin-top: 32px;
 }

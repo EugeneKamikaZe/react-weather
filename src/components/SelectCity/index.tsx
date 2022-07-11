@@ -31,25 +31,26 @@ const SelectCity: React.FC<SelectProps> = memo(({APIKey}) => {
         }),
         shallow,
     );
-    const {selectCity, setSearchCity, cityName} = useCity((state) => ({
-        selectCity: state.selectCity,
-        setSearchCity: state.setSearchCity,
-        cityName: state.city
-    }));
+    const selectCity = useCity((state) => state.selectCity);
     const randomCity = capitalCity();
 
-    const [place, setPlace] = useState('')
+    const [place, setPlace] = useState('');
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setPlace(e.target.value)
-    }
+        setPlace(e.target.value);
+    };
 
+
+
+    const [searchCity, setSearchCity] = useState('');
     const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault();
 
         if (place.length === 0) {
             fetch(APIKey, randomCity);
-        } else if(place !== cityName) {
-            setSearchCity(place)
+        }
+
+        if (place && place !== searchCity) {
+            setSearchCity(place);
             fetch(APIKey, place);
         }
 
@@ -64,38 +65,43 @@ const SelectCity: React.FC<SelectProps> = memo(({APIKey}) => {
         // setHide(true)
     };
 
-    // if (data) {
-    //     console.log(data)
-    // }
-
     return (
         <div className={s.select}>
             <form onSubmit={handleSubmit}>
-                <Input className='input'
-                       id='city'
-                       labelText='Select City:'
-                       placeholder={randomCity}
-                       handleChange={handleChange}/>
+                <Input
+                    className='input'
+                    id='city'
+                    labelText='Select City:'
+                    placeholder={randomCity}
+                    handleChange={handleChange}
+                />
 
-                <input className={cn('btn', 'btn-primary', s.btnSubmit, {['disabled']: place === cityName})}
-                       disabled={place === cityName}
-                       type='submit'
-                       value='Search'/>
+                <input
+                    className={cn('btn', 'btn-primary', s.btnSubmit, {
+                        ['disabled']: place.length > 0 && place === searchCity,
+                    })}
+                    disabled={place.length > 0 && place === searchCity}
+                    type='submit'
+                    value='Search'
+                />
             </form>
 
             {data?.length === 0 && <p className={s.emptyResult}>Nothing Found</p>}
 
             {data && data.length > 0 && !hide && (
                 <div className={s.result}>
-                    {data.map((item: CityProps) => (
-                        <SelectItem item={item}
-                                    onSelect={handleSelect}
-                                    current={selected} key={item.lat}/>
+                    {data.map((item: CityProps, index: number) => (
+                        <SelectItem
+                            item={item}
+                            onSelect={handleSelect}
+                            currentLat={selected}
+                            key={index}
+                        />
                     ))}
                 </div>
             )}
         </div>
-    )
-})
+    );
+});
 
 export default SelectCity;

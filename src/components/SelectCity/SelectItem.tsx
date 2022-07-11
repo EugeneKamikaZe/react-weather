@@ -1,6 +1,6 @@
-import React, {memo, SyntheticEvent, useState} from 'react';
+import React, { memo, SyntheticEvent, useState } from 'react';
 import s from './style.module.scss';
-import {CityProps} from './index';
+import { CityProps } from './index';
 
 import Toggle from '../../assets/icons/toggle.svg';
 import cn from 'classnames';
@@ -9,10 +9,10 @@ interface SelectProps {
     item: CityProps;
     onSelect: (item: CityProps) => void;
     className?: string;
-    current: number;
+    currentLat: number;
 }
 
-const SelectItem: React.FC<SelectProps> = memo(({item, onSelect, current}) => {
+const SelectItem: React.FC<SelectProps> = ({ item, onSelect, currentLat }) => {
     const [isShow, setIsShow] = useState(false);
 
     const handleShow = () => {
@@ -22,33 +22,32 @@ const SelectItem: React.FC<SelectProps> = memo(({item, onSelect, current}) => {
     const handleSelect = (item: CityProps) => {
         onSelect(item);
     };
-
-    const selected = current === item.lat;
+    const isCurrentLat = currentLat === item.lat
 
     return (
         <div
-            className={cn(s.resultItem, {[s.selected]: selected})}
+            className={cn(s.resultItem, { [s.selected]: isCurrentLat })}
             key={item.lat}
             onClick={handleShow}
         >
             <div className={s.resultItem_info}>
                 <p className={s.textWToggle}>
                     {item.name} ({item.country})
-                    <img className={cn({[s.show]: isShow})} src={Toggle} alt='toggle'/>
+                    <img className={cn({ [s.show]: isShow })} src={Toggle} alt='toggle' />
                 </p>
                 <button
-                    className={cn('btn', 'btn-xs', {['disabled']: selected})}
-                    disabled={selected}
+                    className={cn('btn', 'btn-xs', { ['disabled']: isCurrentLat })}
+                    disabled={currentLat === item.lat}
                     onClick={(e: SyntheticEvent) => {
                         e.stopPropagation();
                         handleSelect(item);
                     }}
                 >
-                    {selected ? 'Selected' : 'Select'}
+                    {isCurrentLat ? 'Selected' : 'Select'}
                 </button>
             </div>
 
-            <div className={cn({[s.show]: isShow}, s.resultItem_additional)}>
+            <div className={cn({ [s.show]: isShow }, s.resultItem_additional)}>
                 {item.state && (
                     <p>
                         <span>State:</span> {item.state}
@@ -63,6 +62,6 @@ const SelectItem: React.FC<SelectProps> = memo(({item, onSelect, current}) => {
             </div>
         </div>
     );
-})
+};
 
-export default SelectItem;
+export default memo(SelectItem);
