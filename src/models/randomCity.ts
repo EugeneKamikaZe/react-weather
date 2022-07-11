@@ -6,7 +6,6 @@ export default function capitalCity() {
     'Kabul',
     'Yerevan',
     'Canberra',
-    'Baku',
     'Brasilia',
     'Minsk',
     'Beijing',
