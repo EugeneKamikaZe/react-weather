@@ -20,9 +20,15 @@ const App = () => {
         shallow,
     );
 
+    const style = {
+        overflow: 'hidden'
+    }
+
     return (
         <div className={s.wrapper}>
-            <div className={cn(s.block, s.select)}>
+            <div className={s.block} style={style}>
+                <SunWalk lat={latitude} lng={longitude} />
+
                 <SelectCity APIKey={APIKey} />
             </div>
 

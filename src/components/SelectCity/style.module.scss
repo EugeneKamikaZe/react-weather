@@ -1,9 +1,12 @@
 @import 'src/scss/utilites/variables';
 
 .select {
+    position: absolute;
     padding: 24px;
-    background-color: $white;
-    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
 }
 
 .result {
@@ -19,9 +22,10 @@
     font-size: 12px;
     font-weight: 400;
     cursor: pointer;
+    background: $white;
 
     &:hover {
-        background-color: rgba($gray, 15%);
+        background-color: #f2f2f2;
     }
 
     &_info {

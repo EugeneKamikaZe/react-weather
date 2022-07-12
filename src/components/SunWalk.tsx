@@ -6,8 +6,8 @@ import { sunMove } from '../models/sunWalk';
 import { useCity } from '../store/geocode';
 
 interface GeoProps {
-    lat: number;
-    lng: number;
+    lat: number | null;
+    lng: number | null;
 }
 
 const SunWalk: React.FC<GeoProps> = ({ lat, lng }) => {
@@ -29,9 +29,12 @@ const SunWalk: React.FC<GeoProps> = ({ lat, lng }) => {
     );
 
     useEffect(() => {
-        fetch(lat, lng);
+        if (lat != null && lng != null) {
+            fetch(lat, lng);
+        }
     }, [latitude, longitude]);
 
+    let sunStyle
     if (data) {
         const sunWalkStatus = sunMove(
             data.results.sunrise,
@@ -39,24 +42,22 @@ const SunWalk: React.FC<GeoProps> = ({ lat, lng }) => {
             data.results.sunset,
             200,
         );
-        const sunStyle = {
+        sunStyle = {
             transform: `translateY(-${sunWalkStatus}%)`,
         };
 
         // setInterval(() => {
         //     sunMove(data.results.sunrise, data.results.solar_noon, data.results.sunset)
         // }, 60000);
-
-        return (
-            <div className='weather'>
-                <div className={'sun-wrapper'} style={sunStyle}>
-                    <img src={Sun} alt='sun' className={'sun'} />
-                </div>
-            </div>
-        );
     }
 
-    return <></>;
+    return (
+        <div className='weather'>
+            <div className={'sun-wrapper'} style={sunStyle}>
+                <img src={Sun} alt='sun' className={'sun'} />
+            </div>
+        </div>
+    );
 };
 
 export default SunWalk;
