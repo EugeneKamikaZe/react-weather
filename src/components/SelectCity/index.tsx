@@ -1,12 +1,10 @@
-import React, {ChangeEvent, memo, SyntheticEvent, useState} from 'react';
+import React, {memo, useState} from 'react';
 import {useCity, useGeocode} from '../../store/geocode';
-import shallow from 'zustand/shallow';
-import Input from '../Input';
 
 import s from './style.module.scss';
+
 import SelectItem from './SelectItem';
-import cn from 'classnames';
-import capitalCity from '../../models/randomCity';
+import SearchForm from "../SearchForm";
 
 interface SelectProps {
     APIKey: string;
@@ -21,74 +19,23 @@ export interface CityProps {
     local_names: { [key: string]: string };
 }
 
-const SelectCity: React.FC<SelectProps> = memo(({APIKey}) => {
-    const {data, isLoading, isError, fetch} = useGeocode(
-        (state) => ({
-            data: state.data,
-            isLoading: state.isLoading,
-            isError: state.isError,
-            fetch: state.fetch,
-        }),
-        shallow,
-    );
+const SelectCity: React.FC<SelectProps> = ({APIKey}) => {
+    const data = useGeocode(state => state.data);
     const selectCity = useCity((state) => state.selectCity);
-    const randomCity = capitalCity();
 
-    const [place, setPlace] = useState('');
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setPlace(e.target.value);
-    };
-
-
-
-    const [searchCity, setSearchCity] = useState('');
-    const handleSubmit = (e: SyntheticEvent) => {
-        e.preventDefault();
-
-        if (place.length === 0) {
-            fetch(APIKey, randomCity);
-        }
-
-        if (place && place !== searchCity) {
-            setSearchCity(place);
-            fetch(APIKey, place);
-        }
-
-        // setHide(false)
-    };
-
-    const [hide, setHide] = useState(false);
     const [selected, setSelected] = useState(0);
     const handleSelect = (city: CityProps) => {
         selectCity(city);
         setSelected(city.lat);
-        // setHide(true)
     };
 
     return (
         <div className={s.select}>
-            <form onSubmit={handleSubmit}>
-                <Input
-                    className='input'
-                    id='city'
-                    labelText='Select City:'
-                    placeholder={randomCity}
-                    handleChange={handleChange}
-                />
-
-                <input
-                    className={cn('btn', 'btn-primary', s.btnSubmit, {
-                        ['disabled']: place.length > 0 && place === searchCity,
-                    })}
-                    disabled={place.length > 0 && place === searchCity}
-                    type='submit'
-                    value='Search'
-                />
-            </form>
+            <SearchForm APIKey={APIKey}/>
 
             {data?.length === 0 && <p className={s.emptyResult}>Nothing Found</p>}
 
-            {data && data.length > 0 && !hide && (
+            {data && data.length > 0 && (
                 <div className={s.result}>
                     {data.map((item: CityProps, index: number) => (
                         <SelectItem
@@ -102,6 +49,6 @@ const SelectCity: React.FC<SelectProps> = memo(({APIKey}) => {
             )}
         </div>
     );
-});
+}
 
-export default SelectCity;
+export default memo(SelectCity);
