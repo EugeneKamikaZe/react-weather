@@ -34,7 +34,7 @@ const SunWalk: React.FC<GeoProps> = ({ lat, lng }) => {
         }
     }, [latitude, longitude]);
 
-    let sunStyle
+    let sunStyle;
     if (data) {
         const sunWalkStatus = sunMove(
             data.results.sunrise,

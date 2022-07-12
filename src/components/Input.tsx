@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler} from 'react';
+import React, { ChangeEventHandler } from 'react';
 
 interface IFormInput {
     id: string;
@@ -8,20 +8,19 @@ interface IFormInput {
     handleChange: ChangeEventHandler<HTMLElement>;
     className?: string;
     placeholder?: string | undefined;
-    children?: React.ReactNode
+    children?: React.ReactNode;
 }
 
 const Input: React.FC<IFormInput> = ({
-                                             id,
-                                             labelText,
-                                             type = 'text',
-                                             value,
-                                             handleChange,
-                                             className,
-                                             placeholder,
-                                             children
-                                         }) => {
-
+    id,
+    labelText,
+    type = 'text',
+    value,
+    handleChange,
+    className,
+    placeholder,
+    children,
+}) => {
     return (
         <div className={className}>
             <label htmlFor={id}>{labelText}</label>

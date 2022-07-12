@@ -22,7 +22,7 @@ const SelectItem: React.FC<SelectProps> = ({ item, onSelect, currentLat }) => {
     const handleSelect = (item: CityProps) => {
         onSelect(item);
     };
-    const isCurrentLat = currentLat === item.lat
+    const isCurrentLat = currentLat === item.lat;
 
     return (
         <div

@@ -21,8 +21,8 @@ const App = () => {
     );
 
     const style = {
-        overflow: 'hidden'
-    }
+        overflow: 'hidden',
+    };
 
     return (
         <div className={s.wrapper}>
