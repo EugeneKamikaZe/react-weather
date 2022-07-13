@@ -1,11 +1,16 @@
 .sun {
-    height: 150px;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  box-shadow: 0 0 80px 40px rgba(255, 255, 255, .5),
+  0 0 80px 10px rgba(255, 50, 0, .5);
+  background-color: #FFFFAE;
 
-    &-wrapper {
-        position: absolute;
-        display: block;
-        left: 25%;
-        bottom: -20%;
-        transition: 0.5s transform;
-    }
+  &-wrapper {
+    position: absolute;
+    display: block;
+    left: 25%;
+    bottom: -20%;
+    transition: 0.5s transform;
+  }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Sun from '../assets/sun.png';
+import Sun from '../assets/landscape/sun.svg';
 import { useSunrise } from '../store/sunrise-sunset';
 import shallow from 'zustand/shallow';
 import { sunMove } from '../models/sunWalk';
@@ -54,7 +54,7 @@ const SunWalk: React.FC<GeoProps> = ({ lat, lng }) => {
     return (
         <div className='weather'>
             <div className={'sun-wrapper'} style={sunStyle}>
-                <img src={Sun} alt='sun' className={'sun'} />
+                <div  className='sun'/>
             </div>
         </div>
     );
