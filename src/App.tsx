@@ -1,7 +1,7 @@
 import React from 'react';
 import shallow from 'zustand/shallow';
-import {Locale, Units} from './store/weather';
-import {useCity} from './store/geocode';
+import { Locale, Units } from './store/weather';
+import { useCity } from './store/geocode';
 
 import s from './App.module.scss';
 
@@ -11,7 +11,7 @@ import SelectCity from './components/SelectCity';
 const APIKey = '46c7e8ffbbf9ba21fe33df6625f2ec10';
 
 const App = () => {
-    const {latitude, longitude} = useCity(
+    const { latitude, longitude } = useCity(
         (state) => ({
             latitude: state.lat,
             longitude: state.lng,
@@ -28,26 +28,29 @@ const App = () => {
                     lng={longitude}
                     units={Units.Metric}
                     locale={Locale.US}
-                isSearch/>
+                    isSearch
+                />
             </div>
 
-            {
-                latitude && longitude && <>
+            {latitude && longitude && (
+                <>
                     <WeatherContainer
                         APIKey={APIKey}
                         lat={latitude}
                         lng={longitude}
                         units={Units.Metric}
-                        locale={Locale.US}/>
+                        locale={Locale.US}
+                    />
 
                     <WeatherContainer
                         APIKey={APIKey}
                         lat={latitude}
                         lng={longitude}
                         units={Units.Metric}
-                        locale={Locale.US}/>
+                        locale={Locale.US}
+                    />
                 </>
-            }
+            )}
         </div>
     );
 };

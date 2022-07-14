@@ -14,6 +14,13 @@
         z-index: -1;
         border-radius: 4px;
         height: 40px;
+        transition: 0.2s box-shadow;
+    }
+
+    &:hover {
+        &::before {
+            box-shadow: 0 0 2px 2px rgba($white, 0.5);
+        }
     }
 
     label {

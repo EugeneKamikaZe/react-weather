@@ -6,7 +6,7 @@ import MountainsPng from '../assets/landscape/mountains.png';
 
 import DayForecast from './DayForecast';
 import SunWalk from './SunWalk';
-import SelectCity from "./SelectCity";
+import SelectCity from './SelectCity';
 
 interface WeatherProps {
     APIKey: string;
@@ -14,10 +14,17 @@ interface WeatherProps {
     lng: number | null;
     units: string;
     locale: string;
-    isSearch?: boolean
+    isSearch?: boolean;
 }
 
-const WeatherContainer: React.FC<WeatherProps> = ({ APIKey, lat, lng, units, locale, isSearch }) => {
+const WeatherContainer: React.FC<WeatherProps> = ({
+    APIKey,
+    lat,
+    lng,
+    units,
+    locale,
+    isSearch,
+}) => {
     const { data, isLoading, isError, fetch } = useDayForecast(
         (state) => ({
             data: state.data,
@@ -37,9 +44,7 @@ const WeatherContainer: React.FC<WeatherProps> = ({ APIKey, lat, lng, units, loc
     return (
         data && (
             <div className='block'>
-                {
-                    !isSearch && <DayForecast data={data} />
-                }
+                {!isSearch && <DayForecast data={data} />}
 
                 <SunWalk
                     lat={lat}

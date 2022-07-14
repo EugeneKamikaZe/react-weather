@@ -80,13 +80,13 @@ export function sunMove(
             `(${nowInPlace.getHours()}:${nowInPlace.getMinutes()})`,
         );
 
-       return maxValue - calculateWalk(nowInPlace, solarNoonTime, sunsetTime, maxValue);
+        return maxValue - calculateWalk(nowInPlace, solarNoonTime, sunsetTime, maxValue);
     }
 
     // Night
     if (nowInPlace > sunsetTime || nowInPlace < sunriseTime) {
-        console.log('Night')
+        console.log('Night');
 
-        return 0
+        return 0;
     }
 }
