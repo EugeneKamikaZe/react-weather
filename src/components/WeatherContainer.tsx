@@ -47,8 +47,6 @@ const WeatherContainer: React.FC<WeatherProps> = ({
                 {!isSearch && <DayForecast data={data} />}
 
                 <SunWalk
-                    lat={lat}
-                    lng={lng}
                     sunrise={data.sys.sunrise}
                     sunset={data.sys.sunset}
                     timezone={data.timezone}

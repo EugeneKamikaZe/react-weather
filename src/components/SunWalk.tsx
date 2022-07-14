@@ -1,15 +1,13 @@
 import React from 'react';
 import { sunMove } from '../models/sunWalk';
 
-interface GeoProps {
-    lat: number | null;
-    lng: number | null;
+export interface GeoProps {
     sunrise: number;
     sunset: number;
     timezone: number;
 }
 
-const SunWalk: React.FC<GeoProps> = ({ lat, lng, sunrise, sunset, timezone }) => {
+const SunWalk: React.FC<GeoProps> = ({ sunrise, sunset, timezone }) => {
     const sunWalkStatus = sunMove(sunrise, sunset, timezone, 180);
     let sunStyle = {
         transform: `translateY(-${sunWalkStatus}%)`,

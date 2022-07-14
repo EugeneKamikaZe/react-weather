@@ -12,6 +12,8 @@ type WeatherResultProps = {
     visibility: number;
     weather: [SimpleObj];
     wind: SimpleObj;
+    rain: any;
+    snow: any;
     timezone: number;
     sys: SimpleObj;
 };
