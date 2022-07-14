@@ -36,7 +36,7 @@ const SelectItem: React.FC<SelectProps> = ({ item, onSelect, currentLat }) => {
                     <img className={cn({ [s.show]: isShow })} src={Toggle} alt='toggle' />
                 </p>
                 <button
-                    className={cn('btn', 'btn-xs', { ['disabled']: isCurrentLat })}
+                    className={cn('btn btn-xs btn-primary', { ['disabled']: isCurrentLat })}
                     disabled={currentLat === item.lat}
                     onClick={(e: SyntheticEvent) => {
                         e.stopPropagation();

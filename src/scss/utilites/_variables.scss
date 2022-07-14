@@ -4,9 +4,11 @@ $base-size: 16px !default;
 $default-color: #091e42 !default;
 $white: #fff !default;
 $yellow: #ffd80a !default;
+$yellow-hover: #e2bf07 !default;
 $green: #64dc00 !default;
 $placeholder: #8c8c8c !default;
 $gray: #ccc8c8 !default;
+$gray-light: #dfdfdf !default;
 
 //Box Shadows
 $box-shadow-default: 0 0 4px rgba($default-color, 15%) !default;
@@ -24,3 +26,5 @@ $h3-fw: 2.25rem !default;
 $h4-fw: 1.5rem !default;
 $h5-fw: 1rem !default;
 $h6-fw: 0.625rem !default;
+
+//GlassMorphism

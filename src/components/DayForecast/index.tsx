@@ -1,59 +1,32 @@
-import React, { useEffect } from 'react';
-import { Locale, Units, useDayForecast } from '../../store/weather';
-import shallow from 'zustand/shallow';
+import React from 'react';
+import { Locale } from '../../store/weather';
 import returnDate from '../../models/returnDate';
 
 import s from './style.module.scss';
+import { dateWithTimeOffset } from '../../models/todayOffset';
 
-export interface WeatherProps {
-    APIKey: string;
-    lat: number;
-    lng: number;
-    units?: string;
-    locale?: string;
-}
-
-const DayForecast: React.FC<WeatherProps> = ({
-    APIKey,
-    lat,
-    lng,
-    units = Units.Metric,
-    locale = Locale.US,
-}) => {
-    const { data, isLoading, isError, fetch } = useDayForecast(
-        (state) => ({
-            data: state.data,
-            isLoading: state.isLoading,
-            isError: state.isError,
-            fetch: state.fetch,
-        }),
-        shallow,
-    );
-
-    useEffect(() => {
-        if (lat && lng) {
-            fetch(APIKey, lat, lng, units);
-        }
-    }, [lat, lng]);
-
+const DayForecast = ({ data }: { data: any }) => {
     return (
-        data && (
-            <div className='weather'>
-                <div className={s.header}>
-                    <div className={s.temperature}>{Math.round(data.main.temp)}</div>
+        <div className='weather'>
+            <div className={s.header}>
+                <div className={s.temperature}>{Math.round(data.main.temp)}</div>
 
-                    <div>
-                        <div className={s.day}>{returnDate(Locale.US)}</div>
+                <div>
+                    <div className={s.day}>{returnDate(Locale.US)}</div>
 
-                        <div className={s.condition}>
-                            {data.weather.map((item: any) => (
-                                <p key={item.id}>{item.main}</p>
-                            ))}
-                        </div>
+                    <div className={s.condition}>
+                        {data.weather.map((item: any) => (
+                            <p key={item.id}>{item.main}</p>
+                        ))}
                     </div>
                 </div>
             </div>
-        )
+            <p>
+                {dateWithTimeOffset(new Date(), data.timezone).getHours() +
+                    ':' +
+                    dateWithTimeOffset(new Date(), data.timezone).getMinutes()}
+            </p>
+        </div>
     );
 };
 

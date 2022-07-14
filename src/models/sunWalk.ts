@@ -1,3 +1,5 @@
+import { dateWithTimeOffset } from './todayOffset';
+
 enum timeFormat {
     days = 'days',
     hours = 'hours',
@@ -27,51 +29,64 @@ function calculateWalk(now: Date, min: Date, max: Date, maxValue: number) {
 }
 
 export function sunMove(
-    sunrise: string,
-    solarNoon: string,
-    sunset: string,
+    sunrise: number,
+    sunset: number,
+    timezone: number,
     maxValue: number,
-): number {
-    const sunriseTime = new Date(sunrise);
-    const sunsetTime = new Date(sunset);
-    const solarNoonTime = new Date(solarNoon);
-    const now = new Date();
+): number | undefined {
+    const sunriseTime = dateWithTimeOffset(new Date(sunrise * 1000), timezone);
+    const sunsetTime = dateWithTimeOffset(new Date(sunset * 1000), timezone);
+    let solarNoonTime = new Date((sunsetTime.getTime() + sunriseTime.getTime()) / 2);
+    const nowInPlace = dateWithTimeOffset(new Date(), timezone);
 
-    let result = 0;
+    /*
+    console.log('############################################')
+    console.log('рассвет ####', sunriseTime.getHours(),':',sunriseTime.getMinutes())
+    console.log('зенит ####', solarNoonTime.getHours(),':',solarNoonTime.getMinutes())
+    console.log('закат ####', sunsetTime.getHours(),':',sunsetTime.getMinutes())
+    console.log('############################################')
+    console.log('рассвет ####', sunriseTime)
+    console.log('зенит ####', solarNoonTime)
+    console.log('закат ####', sunsetTime)
+    console.log('############################################')
+     */
 
     // Sunrise
-    if (now > sunriseTime && now <= solarNoonTime) {
-        const timeToEnd = solarNoonTime.getTime() - now.getTime();
+    if (nowInPlace > sunriseTime && nowInPlace <= solarNoonTime) {
+        const timeToEnd = solarNoonTime.getTime() - nowInPlace.getTime();
+
         console.log(
             'Солнце взойдет в зенит через',
             getHumanTime(timeToEnd, timeFormat.hours),
             'часa(/ов)',
             getHumanTime(timeToEnd, timeFormat.minutes),
             'минут',
-            `(${now.getHours()}:${now.getMinutes()})`,
+            `(${nowInPlace.getHours()}:${nowInPlace.getMinutes()})`,
         );
 
-        result = calculateWalk(now, sunriseTime, solarNoonTime, maxValue);
+        return calculateWalk(nowInPlace, sunriseTime, solarNoonTime, maxValue);
     }
 
     // Sunset
-    if (now > solarNoonTime && now < sunsetTime) {
-        const timeToEnd = sunsetTime.getTime() - now.getTime();
+    if (nowInPlace > solarNoonTime && nowInPlace < sunsetTime) {
+        const timeToEnd = sunsetTime.getTime() - nowInPlace.getTime();
+
         console.log(
             'Солнце зайдет через',
             getHumanTime(timeToEnd, timeFormat.hours),
             'часa(/ов)',
             getHumanTime(timeToEnd, timeFormat.minutes),
             'минут',
-            `(${now.getHours()}:${now.getMinutes()})`,
+            `(${nowInPlace.getHours()}:${nowInPlace.getMinutes()})`,
         );
 
-        result = maxValue - calculateWalk(now, solarNoonTime, sunsetTime, maxValue);
+       return maxValue - calculateWalk(nowInPlace, solarNoonTime, sunsetTime, maxValue);
     }
 
-    // if (now > sunsetTime && now < sunriseTime) {
-    //     console.log('Вечер')
-    // }
+    // Night
+    if (nowInPlace > sunsetTime || nowInPlace < sunriseTime) {
+        console.log('Night')
 
-    return result;
+        return 0
+    }
 }

@@ -4,7 +4,7 @@ import { useCity, useGeocode } from '../../store/geocode';
 import s from './style.module.scss';
 
 import SelectItem from './SelectItem';
-import SearchForm from '../SearchForm';
+import SearchForm from './SearchForm';
 
 interface SelectProps {
     APIKey: string;

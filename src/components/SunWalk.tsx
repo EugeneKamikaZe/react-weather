@@ -1,61 +1,27 @@
-import React, { useEffect } from 'react';
-import Sun from '../assets/landscape/sun.svg';
-import { useSunrise } from '../store/sunrise-sunset';
-import shallow from 'zustand/shallow';
+import React from 'react';
 import { sunMove } from '../models/sunWalk';
-import { useCity } from '../store/geocode';
 
 interface GeoProps {
     lat: number | null;
     lng: number | null;
+    sunrise: number;
+    sunset: number;
+    timezone: number;
 }
 
-const SunWalk: React.FC<GeoProps> = ({ lat, lng }) => {
-    const { data, isLoading, isError, fetch } = useSunrise(
-        (state) => ({
-            data: state.data,
-            isLoading: state.isLoading,
-            isError: state.isError,
-            fetch: state.fetch,
-        }),
-        shallow,
-    );
-    const { latitude, longitude } = useCity(
-        (state) => ({
-            latitude: state.lat,
-            longitude: state.lng,
-        }),
-        shallow,
-    );
+const SunWalk: React.FC<GeoProps> = ({ lat, lng, sunrise, sunset, timezone }) => {
+    const sunWalkStatus = sunMove(sunrise, sunset, timezone, 180);
+    let sunStyle = {
+        transform: `translateY(-${sunWalkStatus}%)`,
+    };
 
-    useEffect(() => {
-        if (lat != null && lng != null) {
-            fetch(lat, lng);
-        }
-    }, [latitude, longitude]);
-
-    let sunStyle;
-    if (data) {
-        const sunWalkStatus = sunMove(
-            data.results.sunrise,
-            data.results.solar_noon,
-            data.results.sunset,
-            200,
-        );
-        sunStyle = {
-            transform: `translateY(-${sunWalkStatus}%)`,
-        };
-
-        // setInterval(() => {
-        //     sunMove(data.results.sunrise, data.results.solar_noon, data.results.sunset)
-        // }, 60000);
-    }
+    // setInterval(() => {
+    //     sunMove(data.results.sunrise, data.results.solar_noon, data.results.sunset)
+    // }, 60000);
 
     return (
-        <div className='weather'>
-            <div className={'sun-wrapper'} style={sunStyle}>
-                <div  className='sun'/>
-            </div>
+        <div className={'sun-wrapper'} style={sunStyle}>
+            <div className='sun' />
         </div>
     );
 };
