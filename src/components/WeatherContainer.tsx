@@ -10,8 +10,8 @@ import SelectCity from "./SelectCity";
 
 interface WeatherProps {
     APIKey: string;
-    lat: number;
-    lng: number;
+    lat: number | null;
+    lng: number | null;
     units: string;
     locale: string;
     isSearch?: boolean
