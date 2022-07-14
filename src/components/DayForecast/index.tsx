@@ -3,7 +3,7 @@ import { Locale } from '../../store/weather';
 import returnDate from '../../models/returnDate';
 
 import s from './style.module.scss';
-import { dateWithTimeOffset } from '../../models/todayOffset';
+import { dateWithTimeOffset } from '../../models/dateOffset';
 
 const DayForecast = ({ data }: { data: any }) => {
     return (

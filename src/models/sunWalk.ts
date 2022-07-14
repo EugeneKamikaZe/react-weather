@@ -1,4 +1,4 @@
-import { dateWithTimeOffset } from './todayOffset';
+import { dateWithTimeOffset } from './dateOffset';
 
 enum timeFormat {
     days = 'days',
