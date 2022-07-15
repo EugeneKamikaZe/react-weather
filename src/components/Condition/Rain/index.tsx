@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
+import {animated, config, useSpring} from "react-spring";
 
 import s from './style.module.scss';
 
@@ -57,7 +58,33 @@ const RainTypesEnum = [
 ];
 
 const Rain = () => {
-    return <div></div>;
+    const [isTrue, setIsTrue] = useState(false)
+    const handleClick = () => {
+        setIsTrue(!isTrue)
+    }
+
+
+    function Text() {
+        const [flip, setFlip] = useState(false)
+        const props = useSpring({
+            to: { opacity: 1 },
+            from: { opacity: 0 },
+            reset: true,
+            reverse: flip,
+            delay: 200,
+            config: config.molasses,
+            onRest: () => setFlip(!flip),
+        })
+
+        return <animated.h1 style={props}>hello</animated.h1>
+    }
+
+    const AnimatedText = animated(Text)
+
+    return (
+        <div>
+        </div>
+    )
 };
 
 export default Rain;

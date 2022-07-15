@@ -73,10 +73,7 @@
     }
 
     &_additional {
-        display: none;
         padding: 0 16px 16px;
-        flex-direction: column;
-        gap: 4px;
 
         &.show {
             display: flex;
@@ -116,3 +113,4 @@
 .emptyResult {
     margin-top: 32px;
 }
+

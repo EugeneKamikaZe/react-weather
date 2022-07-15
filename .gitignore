@@ -2,4 +2,10 @@
 /node_modules/
 /package-lock.json
 /.idea
+
+#build dir
 /dist/
+
+#api keys
+.env
+.env.local
