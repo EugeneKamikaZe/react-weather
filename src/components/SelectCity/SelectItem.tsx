@@ -1,10 +1,10 @@
-import React, {memo, SyntheticEvent, useEffect, useRef, useState} from 'react';
+import React, { memo, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import s from './style.module.scss';
-import {CityProps} from './index';
+import { CityProps } from './index';
 
 import Toggle from '../../assets/icons/toggle.svg';
 import cn from 'classnames';
-import SpringSlide from "./SpringSlide";
+import SpringSlide from './SpringSlide';
 
 interface SelectProps {
     item: CityProps;
@@ -13,7 +13,7 @@ interface SelectProps {
     currentLat: number;
 }
 
-const SelectItem: React.FC<SelectProps> = ({item, onSelect, currentLat}) => {
+const SelectItem: React.FC<SelectProps> = ({ item, onSelect, currentLat }) => {
     const [isShow, setIsShow] = useState(false);
 
     const handleShow = () => {
@@ -25,25 +25,25 @@ const SelectItem: React.FC<SelectProps> = ({item, onSelect, currentLat}) => {
     };
     const isCurrentLat = currentLat === item.lat;
 
-    const [height, setHeight] = useState(0)
-    const slideItem = useRef<HTMLDivElement>(null)
+    const [height, setHeight] = useState(0);
+    const slideItem = useRef<HTMLDivElement>(null);
     useEffect(() => {
-        setHeight(slideItem.current!.clientHeight)
-    }, [slideItem])
+        setHeight(slideItem.current!.clientHeight);
+    }, [slideItem]);
 
     return (
         <div
-            className={cn(s.resultItem, {[s.selected]: isCurrentLat})}
+            className={cn(s.resultItem, { [s.selected]: isCurrentLat })}
             key={item.lat}
             onClick={handleShow}
         >
             <div className={s.resultItem_info}>
                 <p className={s.textWToggle}>
                     {item.name} ({item.country})
-                    <img className={cn({[s.show]: isShow})} src={Toggle} alt='toggle'/>
+                    <img className={cn({ [s.show]: isShow })} src={Toggle} alt='toggle' />
                 </p>
                 <button
-                    className={cn('btn btn-xs btn-primary', {['disabled']: isCurrentLat})}
+                    className={cn('btn btn-xs btn-primary', { ['disabled']: isCurrentLat })}
                     disabled={currentLat === item.lat}
                     onClick={(e: SyntheticEvent) => {
                         e.stopPropagation();

@@ -1,11 +1,11 @@
-import React, {memo, useState} from 'react';
-import {useCity, useGeocode} from '../../store/geocode';
+import React, { memo, useState } from 'react';
+import { useCity, useGeocode } from '../../store/geocode';
 
 import s from './style.module.scss';
 
 import SelectItem from './SelectItem';
 import SearchForm from './SearchForm';
-import SpringResultShow from "./SpringItemsShow";
+import SpringResultShow from './SpringItemsShow';
 
 interface SelectProps {
     APIKey: string;
@@ -20,10 +20,10 @@ export interface CityProps {
     local_names: { [key: string]: string };
 }
 
-const SelectCity: React.FC<SelectProps> = ({APIKey}) => {
-    const {data, isLoading} = useGeocode((state) => ({
+const SelectCity: React.FC<SelectProps> = ({ APIKey }) => {
+    const { data, isLoading } = useGeocode((state) => ({
         data: state.data,
-        isLoading: state.isLoading
+        isLoading: state.isLoading,
     }));
     const selectCity = useCity((state) => state.selectCity);
 
@@ -35,7 +35,7 @@ const SelectCity: React.FC<SelectProps> = ({APIKey}) => {
 
     return (
         <div className={s.select}>
-            <SearchForm APIKey={APIKey}/>
+            <SearchForm APIKey={APIKey} />
 
             {data?.length === 0 && <p className={s.emptyResult}>Nothing Found</p>}
 

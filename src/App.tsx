@@ -1,7 +1,7 @@
 import React from 'react';
 import shallow from 'zustand/shallow';
-import {Locale, Units} from './store/weather';
-import {useCity} from './store/geocode';
+import { Locale, Units } from './store/weather';
+import { useCity } from './store/geocode';
 
 import s from './App.module.scss';
 
@@ -9,12 +9,12 @@ import WeatherContainer from './components/WeatherContainer';
 import SelectCity from './components/SelectCity';
 import Statistic from './components/Statistic';
 import Default from './components/Condition/Default';
-import Rain from "./components/Condition/Rain";
+import Rain from './components/Condition/Rain';
 
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 const App = () => {
-    const {latitude, longitude} = useCity(
+    const { latitude, longitude } = useCity(
         (state) => ({
             latitude: state.lat,
             longitude: state.lng,
@@ -24,7 +24,7 @@ const App = () => {
     return (
         <div className={s.wrapper}>
             <div className='block'>
-                <SelectCity APIKey={API_KEY}/>
+                <SelectCity APIKey={API_KEY} />
                 <WeatherContainer
                     APIKey={API_KEY}
                     lat={latitude}
@@ -34,7 +34,6 @@ const App = () => {
                     isSearch
                 />
             </div>
-
 
             {latitude && longitude && (
                 <>
@@ -46,15 +45,13 @@ const App = () => {
                         locale={Locale.US}
                     />
 
-                    <Default/>
+                    <Default />
 
-                    {
-                        import.meta.env.DEV && <Statistic/>
-                    }
+                    {import.meta.env.DEV && <Statistic />}
                 </>
             )}
         </div>
     );
-}
+};
 
 export default App;
