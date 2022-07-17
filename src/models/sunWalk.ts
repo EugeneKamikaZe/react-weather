@@ -29,9 +29,9 @@ function calculateWalk(now: Date, min: Date, max: Date, maxValue: number) {
 }
 
 export function sunMove(
-    sunrise: number | undefined,
-    sunset: number | undefined,
-    timezone: number | undefined,
+    sunrise: number,
+    sunset: number,
+    timezone: number,
     maxValue: number,
 ): number | undefined {
     const sunriseTime = dateWithTimeOffset(new Date(sunrise * 1000), timezone);
