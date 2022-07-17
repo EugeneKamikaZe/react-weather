@@ -24,8 +24,6 @@ const MainWrapper: React.FC<MainWrapper> = ({
         setShowToggle(!showToggle)
     }
 
-    console.log(showToggle)
-
     return (
         <div className='block'>
             <SunWalk/>

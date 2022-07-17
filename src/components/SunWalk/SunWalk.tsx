@@ -9,7 +9,7 @@ export interface GeoProps {
 
 const SunWalk: React.FC<GeoProps> = () => {
     const data = useDayForecast(state => state.data);
-    const sunWalkStatus = sunMove(data!.sys.sunrise, data!.sys.sunset, data!.timezone, 180);
+    const sunWalkStatus = data && sunMove(data.sys.sunrise, data.sys.sunset, data.timezone, 180);
 
     let sunStyle = {
         transform: `translateY(-${sunWalkStatus}%)`,
