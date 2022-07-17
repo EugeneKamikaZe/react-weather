@@ -2,14 +2,24 @@
     height: 150px;
     width: 150px;
     border-radius: 50%;
-    box-shadow: 0 0 80px 80px rgba(255, 255, 255, 0.3), 0 0 80px 50px rgba(255, 50, 0, 0.2);
-    background-color: #ffffae;
+    background-image: radial-gradient(rgba(255, 255, 174, 1) 35%, rgba(255, 255, 174, 0) 50%);
+
+    &-shadow {
+        border-radius: 50%;
+        position: absolute;
+        width: 40%;
+        height: 40%;
+        box-shadow: 0 0 80px 80px rgba(255, 255, 255, 0.3), 0 0 80px 50px rgba(255, 50, 0, 0.2);
+        z-index: -1;
+    }
 
     &-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: absolute;
-        display: block;
-        left: 25%;
         bottom: -10%;
+        left: 25%;
         transition: 0.5s transform;
     }
 }

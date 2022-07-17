@@ -25,12 +25,6 @@ const SelectItem: React.FC<SelectProps> = ({ item, onSelect, currentLat }) => {
     };
     const isCurrentLat = currentLat === item.lat;
 
-    const [height, setHeight] = useState(0);
-    const slideItem = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        setHeight(slideItem.current!.clientHeight);
-    }, [slideItem]);
-
     return (
         <div
             className={cn(s.resultItem, { [s.selected]: isCurrentLat })}
@@ -54,20 +48,18 @@ const SelectItem: React.FC<SelectProps> = ({ item, onSelect, currentLat }) => {
                 </button>
             </div>
 
-            <SpringSlide state={isShow} maxHeight={height}>
-                <div className={cn(s.resultItem_additional)} ref={slideItem}>
-                    {item.state && (
-                        <p>
-                            <span>State:</span> {item.state}
-                        </p>
-                    )}
+            <SpringSlide state={isShow}>
+                {item.state && (
                     <p>
-                        <span>Latitude:</span> {item.lat}
+                        <span>State:</span> {item.state}
                     </p>
-                    <p>
-                        <span>Longitude:</span> {item.lon}
-                    </p>
-                </div>
+                )}
+                <p>
+                    <span>Latitude:</span> {item.lat}
+                </p>
+                <p>
+                    <span>Longitude:</span> {item.lon}
+                </p>
             </SpringSlide>
         </div>
     );

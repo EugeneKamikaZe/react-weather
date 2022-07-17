@@ -7,7 +7,7 @@ import s from './style.module.scss';
 
 import Input from '../../Input';
 
-const SearchForm = ({ APIKey }: { APIKey: string }) => {
+const SearchForm = () => {
     const [place, setPlace] = useState('');
     const [searchClicked, setSearchClicked] = useState(false);
 
@@ -25,11 +25,11 @@ const SearchForm = ({ APIKey }: { APIKey: string }) => {
         setSearchClicked(true);
 
         if (place.length === 0) {
-            fetch(APIKey, randomCity);
+            fetch(randomCity);
         }
 
         if (place.length > 0 && !searchClicked) {
-            fetch(APIKey, place);
+            fetch(place);
         }
     };
 

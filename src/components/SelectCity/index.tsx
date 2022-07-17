@@ -1,15 +1,14 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useCity, useGeocode } from '../../store/geocode';
 
 import s from './style.module.scss';
 
 import SelectItem from './SelectItem';
 import SearchForm from './SearchForm';
-import SpringResultShow from './SpringItemsShow';
-
-interface SelectProps {
-    APIKey: string;
-}
+import SpringTrail from './SpringTrail';
+import SearchBtn from '../SearchBtn';
+import cn from 'classnames';
+import shallow from "zustand/shallow";
 
 export interface CityProps {
     country: string;
@@ -20,12 +19,25 @@ export interface CityProps {
     local_names: { [key: string]: string };
 }
 
-const SelectCity: React.FC<SelectProps> = ({ APIKey }) => {
+interface ToggleProps {
+    onToggle: () => void,
+    isToggle: boolean
+}
+
+const SelectCity: React.FC<ToggleProps> = ({onToggle, isToggle}) => {
     const { data, isLoading } = useGeocode((state) => ({
         data: state.data,
         isLoading: state.isLoading,
     }));
-    const selectCity = useCity((state) => state.selectCity);
+
+    const {latitude, longitude, selectCity} = useCity(
+        (state) => ({
+            latitude: state.lat,
+            longitude: state.lng,
+            selectCity: state.selectCity
+        }),
+        shallow,
+    );
 
     const [selected, setSelected] = useState(0);
     const handleSelect = (city: CityProps) => {
@@ -34,29 +46,33 @@ const SelectCity: React.FC<SelectProps> = ({ APIKey }) => {
     };
 
     return (
-        <div className={s.select}>
-            <SearchForm APIKey={APIKey} />
+        <>
+            {data && (latitude || longitude) && <SearchBtn onClose={onToggle} switchIcon={isToggle} />}
 
-            {data?.length === 0 && <p className={s.emptyResult}>Nothing Found</p>}
+            <div className={cn(s.select, { [s.show]: isToggle })}>
+                <SearchForm/>
 
-            {data && data.length > 0 && (
-                <div className={s.autoHeight}>
-                    <SpringResultShow state={isLoading}>
+                {data?.length === 0 && <p className={s.emptyResult}>Nothing Found</p>}
+
+                {data && data.length > 0 && (
+                    <div className={s.autoHeight}>
                         <div className={s.result}>
-                            {data.map((item: CityProps, index: number) => (
-                                <SelectItem
-                                    item={item}
-                                    onSelect={handleSelect}
-                                    currentLat={selected}
-                                    key={index}
-                                />
-                            ))}
+                            <SpringTrail open={!isLoading}>
+                                {data.map((item: CityProps, index: number) => (
+                                    <SelectItem
+                                        item={item}
+                                        onSelect={handleSelect}
+                                        currentLat={selected}
+                                        key={index}
+                                    />
+                                ))}
+                            </SpringTrail>
                         </div>
-                    </SpringResultShow>
-                </div>
-            )}
-        </div>
+                    </div>
+                )}
+            </div>
+        </>
     );
-};
+}
 
 export default memo(SelectCity);

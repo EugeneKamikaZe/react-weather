@@ -34,3 +34,79 @@
         margin-right: 4px;
     }
 }
+
+.weather {
+    position: relative;
+    padding: 24px;
+    transition: .2s top;
+    top: 0;
+
+    &.hide {
+        top: -100%;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .temperature {
+            font-size: 54px;
+
+            &:after {
+                margin-left: 8px;
+            }
+        }
+    }
+
+    .temperature {
+        display: flex;
+        line-height: 1;
+
+        &:after {
+            content: 'c';
+            position: relative;
+            display: block;
+            font-size: 20px;
+        }
+    }
+
+    .day {
+        display: flex;
+    }
+
+    .condition {
+        text-align: right;
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    .additional {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 8px;
+        opacity: 0;
+        transition: opacity 0.2s;
+
+        &.show {
+            opacity: 1;
+        }
+
+        &-day {
+            width: 20%;
+        }
+
+        .temperature {
+            &:after {
+                font-size: 12px;
+                margin-left: 4px;
+            }
+        }
+
+        .description {
+            font-size: 12px;
+        }
+    }
+}
+

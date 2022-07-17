@@ -3,6 +3,16 @@
     flex-wrap: wrap;
     padding: 32px;
     gap: 32px;
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db);
+}
+
+.icon {
+    top: 50px;
+    left: 50px;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    z-index: 10000;
+    background-color: #000;
 }

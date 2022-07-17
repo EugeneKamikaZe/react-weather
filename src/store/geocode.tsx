@@ -1,12 +1,13 @@
 import create from 'zustand';
 import axios from 'axios';
 import { CityProps } from '../components/SelectCity';
+import {API_KEY} from "../App";
 
 interface GeocodeProps {
     data: null | CityProps[];
     isLoading: boolean;
     isError: string;
-    fetch: (key: string, place: string, limit?: number) => void;
+    fetch: (place: string, limit?: number) => void;
 }
 
 interface PositionProps {
@@ -19,11 +20,11 @@ export const useGeocode = create<GeocodeProps>((set) => ({
     data: null,
     isLoading: true,
     isError: '',
-    fetch: async (APIKey, initialPlace, limit = 5) => {
+    fetch: async (initialPlace, limit = 5) => {
         try {
             const weatherAPI = 'https://api.openweathermap.org/geo/1.0/direct';
             const response = await axios.get(
-                `${weatherAPI}?q=${initialPlace}&appid=${APIKey}&limit=${limit}`,
+                `${weatherAPI}?q=${initialPlace}&appid=${API_KEY}&limit=${limit}`,
             );
 
             set(() => ({

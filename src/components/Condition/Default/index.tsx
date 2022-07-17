@@ -2,10 +2,11 @@ import React from 'react';
 
 import s from './style.module.scss';
 import DayForecast from '../../DayForecast';
-import SunWalk, { GeoProps } from '../../SunWalk';
+// import SunWalk, { GeoProps } from '../../SunWalk';
 import MountainsPng from '../../../assets/landscape/mountains.png';
 import { useDayForecast } from '../../../store/weather';
 import shallow from 'zustand/shallow';
+import SunWalk from '../../SunWalk/SunWalk';
 
 const DefaultTypesEnum = [
     {
@@ -28,14 +29,8 @@ const Default = () => {
 
     return (
         data && (
-            <div className='block'>
-                <SunWalk
-                    sunrise={data.sys.sunrise}
-                    sunset={data.sys.sunset}
-                    timezone={data.timezone}
-                />
+            <div className={s.default}>
 
-                <img src={MountainsPng} alt='' className='mountains' />
             </div>
         )
     );
