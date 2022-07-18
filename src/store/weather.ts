@@ -1,6 +1,6 @@
 import create from 'zustand';
 import axios from 'axios';
-import {API_KEY} from "../App";
+import { API_KEY } from '../App';
 
 type SimpleObj = { [key: string]: number };
 

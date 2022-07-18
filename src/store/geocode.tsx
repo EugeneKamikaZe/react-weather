@@ -1,7 +1,7 @@
 import create from 'zustand';
 import axios from 'axios';
 import { CityProps } from '../components/SelectCity';
-import {API_KEY} from "../App";
+import { API_KEY } from '../App';
 
 interface GeocodeProps {
     data: null | CityProps[];

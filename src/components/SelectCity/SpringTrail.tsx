@@ -1,4 +1,4 @@
-import React, {memo, ReactNode} from 'react';
+import React, { memo, ReactNode } from 'react';
 import { animated, useTrail } from 'react-spring';
 import SpringSlide from './SpringSlide';
 

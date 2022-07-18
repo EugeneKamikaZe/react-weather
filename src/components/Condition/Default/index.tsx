@@ -27,13 +27,7 @@ const Default = () => {
         shallow,
     );
 
-    return (
-        data && (
-            <div className={s.default}>
-
-            </div>
-        )
-    );
+    return data && <div className={s.default}></div>;
 };
 
 export default Default;

@@ -33,11 +33,16 @@ export function sunMove(
     sunset: number,
     timezone: number,
     maxValue: number,
-): number | undefined {
+): { timesOfDay: string; value: number } {
     const sunriseTime = dateWithTimeOffset(new Date(sunrise * 1000), timezone);
     const sunsetTime = dateWithTimeOffset(new Date(sunset * 1000), timezone);
     let solarNoonTime = new Date((sunsetTime.getTime() + sunriseTime.getTime()) / 2);
     const nowInPlace = dateWithTimeOffset(new Date(), timezone);
+
+    const result = {
+        timesOfDay: '',
+        value: 0
+    }
 
     /*
     console.log('############################################')
@@ -64,7 +69,8 @@ export function sunMove(
             `(${nowInPlace.getHours()}:${nowInPlace.getMinutes()})`,
         );
 
-        return calculateWalk(nowInPlace, sunriseTime, solarNoonTime, maxValue);
+        result.timesOfDay = 'Sunrise'
+        result.value = calculateWalk(nowInPlace, sunriseTime, solarNoonTime, maxValue);
     }
 
     // Sunset
@@ -80,13 +86,16 @@ export function sunMove(
             `(${nowInPlace.getHours()}:${nowInPlace.getMinutes()})`,
         );
 
-        return maxValue - calculateWalk(nowInPlace, solarNoonTime, sunsetTime, maxValue);
+        result.timesOfDay = 'Sunset'
+        result.value = maxValue - calculateWalk(nowInPlace, solarNoonTime, sunsetTime, maxValue);
     }
 
     // Night
     if (nowInPlace > sunsetTime || nowInPlace < sunriseTime) {
-        console.log('Night');
+        const timeToSunrise = sunsetTime.getTime() - nowInPlace.getTime();
 
-        return 0;
+        result.timesOfDay = 'Night'
     }
+
+    return result
 }

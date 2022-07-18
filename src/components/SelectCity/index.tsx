@@ -8,7 +8,7 @@ import SearchForm from './SearchForm';
 import SpringTrail from './SpringTrail';
 import SearchBtn from '../SearchBtn';
 import cn from 'classnames';
-import shallow from "zustand/shallow";
+import shallow from 'zustand/shallow';
 
 export interface CityProps {
     country: string;
@@ -20,21 +20,21 @@ export interface CityProps {
 }
 
 interface ToggleProps {
-    onToggle: () => void,
-    isToggle: boolean
+    onToggle: () => void;
+    isToggle: boolean;
 }
 
-const SelectCity: React.FC<ToggleProps> = ({onToggle, isToggle}) => {
+const SelectCity: React.FC<ToggleProps> = ({ onToggle, isToggle }) => {
     const { data, isLoading } = useGeocode((state) => ({
         data: state.data,
         isLoading: state.isLoading,
     }));
 
-    const {latitude, longitude, selectCity} = useCity(
+    const { latitude, longitude, selectCity } = useCity(
         (state) => ({
             latitude: state.lat,
             longitude: state.lng,
-            selectCity: state.selectCity
+            selectCity: state.selectCity,
         }),
         shallow,
     );
@@ -47,10 +47,12 @@ const SelectCity: React.FC<ToggleProps> = ({onToggle, isToggle}) => {
 
     return (
         <>
-            {data && (latitude || longitude) && <SearchBtn onClose={onToggle} switchIcon={isToggle} />}
+            {data && (latitude || longitude) && (
+                <SearchBtn onClose={onToggle} switchIcon={isToggle} />
+            )}
 
             <div className={cn(s.select, { [s.show]: isToggle })}>
-                <SearchForm/>
+                <SearchForm />
 
                 {data?.length === 0 && <p className={s.emptyResult}>Nothing Found</p>}
 
@@ -73,6 +75,6 @@ const SelectCity: React.FC<ToggleProps> = ({onToggle, isToggle}) => {
             </div>
         </>
     );
-}
+};
 
 export default memo(SelectCity);

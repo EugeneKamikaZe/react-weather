@@ -38,7 +38,7 @@
 .weather {
     position: relative;
     padding: 24px;
-    transition: .2s top;
+    transition: 0.2s top;
     top: 0;
 
     &.hide {
@@ -109,4 +109,3 @@
         }
     }
 }
-

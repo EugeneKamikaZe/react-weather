@@ -9,3 +9,4 @@
 #api keys
 .env
 .env.local
+/analyze.html

@@ -1,6 +1,6 @@
 import React from 'react';
 import shallow from 'zustand/shallow';
-import {useCity} from './store/geocode';
+import { useCity } from './store/geocode';
 
 import s from './App.module.scss';
 
@@ -10,7 +10,7 @@ import MainWrapper from './components/MainWrapper';
 export const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 const App = () => {
-    const {latitude, longitude} = useCity(
+    const { latitude, longitude } = useCity(
         (state) => ({
             latitude: state.lat,
             longitude: state.lng,
@@ -20,14 +20,12 @@ const App = () => {
 
     return (
         <div className={s.wrapper}>
-            <MainWrapper/>
+            <MainWrapper />
 
             <>
-                <MainWrapper
-                    isSearch
-                />
+                <MainWrapper isSearch />
 
-                {import.meta.env.DEV && <Statistic/>}
+                {import.meta.env.DEV && <Statistic />}
             </>
         </div>
     );
