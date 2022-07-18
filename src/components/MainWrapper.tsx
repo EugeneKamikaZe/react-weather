@@ -1,14 +1,9 @@
-import React, {memo, useEffect, useState} from 'react';
-
-import s from './style.module.scss';
+import React, {memo, useState} from 'react';
 
 import SunWalk from './SunWalk/SunWalk';
 import MountainsPng from '../assets/landscape/mountains.png';
-import {useDayForecast} from '../store/weather';
-import shallow from 'zustand/shallow';
 import DayForecast from './DayForecast';
 import SelectCity from './SelectCity';
-import {useCity} from "../store/geocode";
 
 interface MainWrapper {
     isSearch?: boolean;

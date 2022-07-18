@@ -1,6 +1,5 @@
 import React from 'react';
 import shallow from 'zustand/shallow';
-import {Locale, Units} from './store/weather';
 import {useCity} from './store/geocode';
 
 import s from './App.module.scss';
@@ -21,17 +20,15 @@ const App = () => {
 
     return (
         <div className={s.wrapper}>
-            <MainWrapper />
+            <MainWrapper/>
 
-            {latitude && longitude && (
-                <>
-                    <MainWrapper
-                        isSearch
-                    />
+            <>
+                <MainWrapper
+                    isSearch
+                />
 
-                    {import.meta.env.DEV && <Statistic/>}
-                </>
-            )}
+                {import.meta.env.DEV && <Statistic/>}
+            </>
         </div>
     );
 };
