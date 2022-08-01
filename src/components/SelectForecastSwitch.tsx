@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import SelectCity from "./SelectCity";
-import DayForecast from "./DayForecast";
+import React, { useState } from 'react';
+import SelectCity from './SelectCity';
+import DayForecast from './DayForecast';
 
 const SelectForecastSwitch = () => {
     const [showToggle, setShowToggle] = useState(true);

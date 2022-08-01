@@ -5,7 +5,7 @@ import capitalCity from '../../../models/randomCity';
 import cn from 'classnames';
 import s from './style.module.scss';
 
-import Input from '../../Input';
+import Input from '../Input';
 
 const SearchForm = () => {
     const [place, setPlace] = useState('');

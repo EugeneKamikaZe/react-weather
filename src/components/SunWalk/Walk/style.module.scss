@@ -1,0 +1,48 @@
+.wrapper,
+.devWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .sunWalk,
+    .devSunWalk {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.devWrapper {
+    .devSunWalk {
+        overflow: visible;
+
+        circle {
+            transition: 0.2s transform;
+            cursor: pointer;
+            transform-origin: center;
+            transform-box: fill-box;
+
+            &:active {
+                cursor: grab;
+                color: #ff0000;
+            }
+
+            &:hover {
+                transform: scale(2, 2);
+            }
+        }
+    }
+
+    .apply {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+}
+
+.wrapper {
+    .sun {
+        //transition: all 0.2s;
+    }
+}

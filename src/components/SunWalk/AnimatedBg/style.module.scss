@@ -6,10 +6,22 @@
     height: 100%;
 }
 
-.nightBg {
+.bg {
+    @extend %bg;
+}
+
+.dayNightBg {
     @extend %bg;
 }
 
 .sunriseSunsetBg {
     @extend %bg;
+}
+
+.stars {
+    width: 100%;
+    height: 100%;
+}
+.starsBg {
+    background-color: #000;
 }
