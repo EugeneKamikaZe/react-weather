@@ -1,17 +1,17 @@
 .sun {
     display: flex;
-    align-items: center;
-    justify-content: center;
     position: absolute;
     bottom: -18%;
     left: -25%;
+    justify-content: center;
+    align-items: center;
     //transition: 0.5s transform;
 
     .sunCircle {
-        height: 150px;
-        width: 150px;
         border-radius: 50%;
         background-image: radial-gradient(rgba(255, 255, 174, 1) 35%, rgba(255, 255, 174, 0) 50%);
+        width: 150px;
+        height: 150px;
     }
 
     //.sunShadow {

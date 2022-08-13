@@ -1,11 +1,11 @@
 .btn {
-    color: $default-color;
-    line-height: 1;
-    font-weight: 400;
+    cursor: pointer;
     outline: none;
     border: none;
     border-radius: 4px;
-    cursor: pointer;
+    color: $default-color;
+    font-weight: 400;
+    line-height: 1;
 
     &-xs {
         padding: 4px 8px;
@@ -18,8 +18,8 @@
     }
 
     &-primary {
-        background-color: $yellow;
         transition: 0.2s background-color;
+        background-color: $yellow;
 
         &:hover {
             background-color: $yellow-hover;

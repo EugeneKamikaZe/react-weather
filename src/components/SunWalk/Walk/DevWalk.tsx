@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useControls } from 'leva';
-import { Bezier } from '../../../models/bezier';
+import { Bezier } from '../../../helpers/bezier';
 
 import cn from 'classnames';
 import s from './style.module.scss';

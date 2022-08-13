@@ -3,7 +3,7 @@ import { animated, SpringValue, useSpring } from 'react-spring';
 import { APP_CONFIG } from '../../../App';
 
 import s from './style.module.scss';
-import { Bezier } from '../../../models/bezier';
+import { Bezier } from '../../../helpers/bezier';
 
 const AnimatedSun = ({ t }: { t: number }) => {
     const sunStyle = APP_CONFIG.sunStyles;

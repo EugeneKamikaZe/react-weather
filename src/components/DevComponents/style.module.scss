@@ -1,14 +1,14 @@
 .block {
     position: fixed;
-    background-color: #fff;
-    z-index: 100;
     top: 8px;
     right: 8px;
-    padding: 16px;
-    border-radius: 4px;
-    font-size: 10px;
     opacity: 0.5;
+    z-index: 100;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 16px;
     max-width: 200px;
+    font-size: 10px;
 
     p {
         &:not(:last-child) {

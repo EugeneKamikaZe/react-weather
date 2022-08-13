@@ -6,15 +6,15 @@
 
 .temperature {
     display: flex;
-    line-height: 1;
     font-size: 54px;
+    line-height: 1;
 
     &:after {
-        content: 'c';
-        position: relative;
         display: block;
-        font-size: 20px;
+        position: relative;
         margin-left: 8px;
+        content: 'c';
+        font-size: 20px;
     }
 }
 
@@ -25,21 +25,21 @@
 .condition {
     display: flex;
     justify-content: right;
-    text-align: right;
-    font-size: 24px;
     font-weight: 400;
+    font-size: 24px;
+    text-align: right;
 
     p:not(:last-child)::after {
-        content: ',';
         margin-right: 4px;
+        content: ',';
     }
 }
 
 .weather {
     position: relative;
-    padding: 24px;
-    transition: 0.2s top;
     top: 0;
+    transition: 0.2s top;
+    padding: 24px;
 
     &.hide {
         top: -100%;
@@ -64,9 +64,9 @@
         line-height: 1;
 
         &:after {
-            content: 'c';
-            position: relative;
             display: block;
+            position: relative;
+            content: 'c';
             font-size: 20px;
         }
     }
@@ -76,18 +76,18 @@
     }
 
     .condition {
-        text-align: right;
-        font-size: 24px;
         font-weight: 400;
+        font-size: 24px;
+        text-align: right;
     }
 
     .additional {
         display: flex;
-        justify-content: space-between;
         flex-wrap: wrap;
-        margin-top: 8px;
+        justify-content: space-between;
         opacity: 0;
         transition: opacity 0.2s;
+        margin-top: 8px;
 
         &.show {
             opacity: 1;
@@ -99,8 +99,8 @@
 
         .temperature {
             &:after {
-                font-size: 12px;
                 margin-left: 4px;
+                font-size: 12px;
             }
         }
 

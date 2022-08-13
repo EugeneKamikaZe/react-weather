@@ -1,13 +1,13 @@
 import React, { memo, useEffect } from 'react';
 import { Locale, useDayForecast } from '../../store/weather';
-import returnDate from '../../models/returnDate';
+import returnDate from '../../helpers/returnDate';
 
 import s from './style.module.scss';
 
 import shallow from 'zustand/shallow';
 import { useCity } from '../../store/geocode';
 import cn from 'classnames';
-import { dateWithTimeOffset } from '../../models/dateOffset';
+import { dateWithTimeOffset } from '../../helpers/dateOffset';
 
 const DayForecast = ({ isToggle }: { isToggle: boolean }) => {
     const { data, isLoading, isError, fetch } = useDayForecast(

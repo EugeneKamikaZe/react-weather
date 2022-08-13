@@ -1,6 +1,6 @@
 import React, { ChangeEvent, memo, SyntheticEvent, useState } from 'react';
 import { useGeocode } from '../../../store/geocode';
-import capitalCity from '../../../models/randomCity';
+import capitalCity from '../../../helpers/randomCity';
 
 import cn from 'classnames';
 import s from './style.module.scss';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDayForecast } from '../../store/weather';
-import { sunMove } from '../../models/sunWalk';
+import { sunMove } from '../../helpers/sunWalk';
 import { useControls } from 'leva';
 
 import s from './style.module.scss';

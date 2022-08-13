@@ -1,21 +1,23 @@
 .test {
-    font-size: 10px;
     margin-bottom: 16px;
+    font-size: 10px;
 }
 
 .toggler {
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 12px;
-    width: 12px;
+
+    align-items: center;
     transform: rotate(-90deg);
-    margin-left: auto;
     transition: transform 0.2s;
     cursor: pointer;
+    margin-left: auto;
+    width: 12px;
+    height: 12px;
 
     img {
         width: 100%;
+
         height: 100%;
     }
 

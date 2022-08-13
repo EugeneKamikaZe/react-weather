@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './style.module.scss';
-import { Bezier } from '../../../models/bezier';
+import { Bezier } from '../../../helpers/bezier';
 import { APP_CONFIG } from '../../../App';
 
 const Walk = ({ time }: { time: number }) => {
