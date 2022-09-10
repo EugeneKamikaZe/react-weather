@@ -6,7 +6,6 @@ import {timeToValue} from "../../../helpers/sunriseSunsetWals";
 
 const SunriseBg = ({time}: { time: number }) => {
     const result = timeToValue(time, 0.1)
-    console.log(result)
 
     const animatedProps = useSpring({
         to: {

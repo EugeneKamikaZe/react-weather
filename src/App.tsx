@@ -10,14 +10,14 @@ import TestContainer from './components/TestContainer';
 import Stars from './components/SunWalk/Stars';
 import DevWalk from './components/SunWalk/Walk/DevWalk';
 import SunriseBg from './components/SunWalk/AnimatedBg/SunriseBg';
-import { useControls } from 'leva';
+import {useControls} from 'leva';
 import Walk from './components/SunWalk/Walk/Walk';
 
 export const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 export const APP_CONFIG = config;
 
 const App = () => {
-    const { tBezier } = useControls('Sun', {
+    const {tBezier} = useControls('Sun', {
         tBezier: {
             value: 0,
             min: 0,
@@ -28,26 +28,22 @@ const App = () => {
 
     return (
         <div className={s.wrapper}>
-            {import.meta.env.DEV ? (
-                <>
-                    <Statistic />
+            <MainWrapper/>
 
-                    <TestContainer>
-                        <Stars />
-                    </TestContainer>
+            <Statistic/>
 
-                    <TestContainer className={s.visible}>
-                        <DevWalk />
-                    </TestContainer>
+            <TestContainer>
+                <Stars/>
+            </TestContainer>
 
-                    <TestContainer className={s.dayBg}>
-                        <SunriseBg time={tBezier} />
-                        <Walk time={tBezier} />
-                    </TestContainer>
-                </>
-            ) : (
-                <MainWrapper />
-            )}
+            <TestContainer className={s.visible}>
+                <DevWalk/>
+            </TestContainer>
+
+            <TestContainer className={s.dayBg}>
+                <SunriseBg time={tBezier}/>
+                <Walk time={tBezier}/>
+            </TestContainer>
         </div>
     );
 };
