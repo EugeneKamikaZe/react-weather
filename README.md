@@ -30,32 +30,3 @@ Use component to show the widget.
 ## Before start
 
 use `npm run install` in the project root folder
-
-## Available Scripts
-
-In the project directory, you can run:
-
-```npm run dev```
-
-Runs the app in the development mode.\
-The application will open automatically.\
-If this did not happen - open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-```npm run build```
-
-Builds the app for development to the `dist` folder.
-
-``npm run preview``
-
-Preview static files. \
-Use that after ***npm build***.
-
-``npm run lint``
-For eslint code. \
-Or ``npm run lint:fix``
-to auto fix code. 
-
-``npm run prettier`` - use prettier.\
-Or ``npm run prettier:fix`` fix
-
-Or ``npm run format`` to use both.
