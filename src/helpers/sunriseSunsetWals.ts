@@ -1,20 +1,20 @@
 export function timeToValue(
     time: number,
     stamp: number = 0.08,
-    color: number = 50,
     steps: number = 4,
 ) {
     const result = {
         opacity: 0,
-        color: color
+        color: 255
     }
 
     if (time < .5) {
         let min = 0
         let max = stamp
+        let colorTemp = 50
 
-        for (let i = 0, tempVal = stamp, colorTemp = color; i < steps; i++) {
-            if (time > min && time <= max) {
+        for (let i = 0, tempVal = stamp; i < steps; i++) {
+            if (time >= min && time < max) {
                 result.color = (time * colorTemp) / tempVal
 
                 if (i === 0) {
@@ -26,42 +26,43 @@ export function timeToValue(
                 }
 
                 if (i === 3) {
-                    result.opacity = .6 - ((time - min) * .6) / (max - min)
+                    result.opacity = .6 - ((time - min) * .6) / stamp
                 }
             }
 
             min = tempVal
             tempVal += stamp
             max = tempVal
-            colorTemp += color
+            colorTemp += 50
         }
     }
 
     if (time > .5) {
-        let min = 0.68
-        let max = min + stamp
+        let max = 1
+        let min = max - stamp
+        let colorTemp = 100
 
-        for (let i = 0, tempVal = stamp, colorTemp = color; i < steps; i++) {
-            if (time > min && time <= max) {
-                result.color = (time * colorTemp) / tempVal
+        for (let i = 0, tempVal = stamp; i < steps; i++) {
+            if (time >= min && time < max) {
+                result.color = colorTemp - ((time - min) * 50) / stamp
 
-                if (i === 0) {
-                    result.opacity = (time * .6) / max
+                if (i === 3) {
+                    result.opacity = ((time - min) * .6) / stamp
                 }
 
                 if (i > 0 && i < 3) {
                     result.opacity = .6
                 }
 
-                if (i === 3) {
-                    result.opacity = .6 - ((time - min) * .6) / (max - min)
+                if (i === 0) {
+                    result.opacity = .6 - ((time - min) * .6) / stamp
                 }
             }
 
-            min = tempVal
+            max = min
+            min -= stamp
             tempVal += stamp
-            max = tempVal
-            colorTemp += color
+            colorTemp += 50
         }
     }
 
