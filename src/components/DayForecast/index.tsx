@@ -1,13 +1,14 @@
 import React, { memo, useEffect } from 'react';
-import { Locale, useDayForecast } from '../../store/weather';
-import returnDate from '../../helpers/returnDate';
+import { useDayForecast } from '../../store/weather';
 
 import s from './style.module.scss';
-
-import shallow from 'zustand/shallow';
-import { useCity } from '../../store/geocode';
 import cn from 'classnames';
-import { dateWithTimeOffset } from '../../helpers/dateOffset';
+import shallow from 'zustand/shallow';
+
+import { useCity } from '../../store/geocode';
+
+import moment from "moment";
+import 'moment-timezone';
 
 const DayForecast = ({ isToggle }: { isToggle: boolean }) => {
     const { data, isLoading, isError, fetch } = useDayForecast(
@@ -41,7 +42,15 @@ const DayForecast = ({ isToggle }: { isToggle: boolean }) => {
                     <div className={s.temperature}>{Math.round(data.main.temp)}</div>
 
                     <div>
-                        <div className={s.day}>{returnDate(Locale.US)}</div>
+                        <div className={s.day}>
+                            {
+                                moment().utcOffset(data.timezone / 60).format('dddd')
+                            }
+                            <br/>
+                            {
+                                moment().utcOffset(data.timezone / 60).format('DD MMMM')
+                            }
+                        </div>
 
                         <div className={s.condition}>
                             {data.weather.map((item: any) => (
@@ -51,9 +60,9 @@ const DayForecast = ({ isToggle }: { isToggle: boolean }) => {
                     </div>
                 </div>
                 <p>
-                    {dateWithTimeOffset(new Date(), data.timezone).getHours() +
-                        ':' +
-                        dateWithTimeOffset(new Date(), data.timezone).getMinutes()}
+                    {
+                        moment().utcOffset(data.timezone / 60).format('HH:mm:ss')
+                    }
                 </p>
             </div>
         )

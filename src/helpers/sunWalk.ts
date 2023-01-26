@@ -1,30 +1,17 @@
 import { dateWithTimeOffset } from './dateOffset';
-
-enum timeFormat {
-    days = 'days',
-    hours = 'hours',
-    minutes = 'minutes',
-    seconds = 'seconds',
-}
-
-function getHumanTime(time: number, format: timeFormat) {
-    switch (format) {
-        case timeFormat.days:
-            return Math.floor(time / 1000 / 60 / 60 / 24);
-        case timeFormat.hours:
-            return Math.floor((time / 1000 / 60 / 60) % 24);
-        case timeFormat.minutes:
-            return Math.floor((time / 1000 / 60) % 60);
-        case timeFormat.seconds:
-            return Math.floor((time / 1000) % 60);
-    }
-}
+import moment from "moment";
 
 function nowT(now: Date, min: Date, max: Date) {
     return (
         (now.getHours() * 60 + now.getMinutes() - (min.getHours() * 60 + min.getMinutes())) /
         (max.getHours() * 60 + max.getMinutes() - (min.getHours() * 60 + min.getMinutes()))
     );
+}
+
+enum DayPeriod {
+    night = 'Night',
+    sunrise = 'Sunrise',
+    sunset = 'Sunset'
 }
 
 export function sunMove(
@@ -37,91 +24,72 @@ export function sunMove(
     let solarNoonTime = new Date((sunsetTime.getTime() + sunriseTime.getTime()) / 2);
     const nowInPlace = dateWithTimeOffset(new Date(), timezone);
 
+// #############################
+
+    const timeInPlace = moment().utcOffset(timezone / 60)
+    const sunriseUnix = moment.unix(sunrise).utcOffset(timezone / 60)
+    const sunsetUnix = moment.unix(sunset).utcOffset(timezone / 60)
+    const solarNoon = moment((sunsetUnix.valueOf() + sunriseUnix.valueOf()) / 2)
+
+    console.log(' ')
+    console.log('### ### ### ### ###')
+    console.log('               --- TIME IN PLACE ---', timeInPlace.format('HH:mm:ss'))
+    console.log('                   sunRise', sunriseUnix.format('HH:mm:ss'))
+    console.log('                   Sunset', sunsetUnix.format('HH:mm:ss'))
+    console.log('### ### ### ### ###')
+
+    const isAfterSunrise = timeInPlace.isAfter(sunriseUnix)
+    const isBeforeSunset = timeInPlace.isBefore(sunsetUnix)
+
+// #############################
+
     const result = {
         timesOfDay: '',
         value: 0,
     };
 
     //Day
-    if (nowInPlace > sunriseTime && nowInPlace < sunsetTime) {
+    if (isAfterSunrise && isBeforeSunset) {
+        // TODO Переделать говно
         result.value = nowT(nowInPlace, sunriseTime, sunsetTime);
     }
 
-    if (import.meta.env.VITE_WEATHER_API_KEY) {
-        // Sunrise
-        if (nowInPlace > sunriseTime && nowInPlace <= solarNoonTime) {
-            const timeToEnd = solarNoonTime.getTime() - nowInPlace.getTime();
+    // Sunrise
+    if (isAfterSunrise && timeInPlace.isSameOrBefore(solarNoon)) {
+        const timeToEnd = moment.utc(solarNoon.diff(timeInPlace))
 
-            console.log(
-                'Солнце взойдет в зенит через',
-                getHumanTime(timeToEnd, timeFormat.hours),
-                'часa(/ов)',
-                getHumanTime(timeToEnd, timeFormat.minutes),
-                'минут',
-                `(${nowInPlace.getHours()}:${nowInPlace.getMinutes()})`,
-            );
+        console.log('Солнце взойдет в зенит через', timeToEnd.format('HH:mm:ss'));
 
-            result.timesOfDay = 'Sunrise';
-        }
-
-        // Sunset
-        if (nowInPlace > solarNoonTime && nowInPlace < sunsetTime) {
-            const timeToEnd = sunsetTime.getTime() - nowInPlace.getTime();
-
-            console.log(
-                'Солнце зайдет через',
-                getHumanTime(timeToEnd, timeFormat.hours),
-                'часa(/ов)',
-                getHumanTime(timeToEnd, timeFormat.minutes),
-                'минут',
-                `(${nowInPlace.getHours()}:${nowInPlace.getMinutes()})`,
-            );
-        }
+        result.timesOfDay = DayPeriod.sunrise;
     }
 
-    // Night
-    if (nowInPlace > sunsetTime || nowInPlace < sunriseTime) {
-        const timeToSunrise = sunriseTime.setDate(sunriseTime.getDate() + 1) - nowInPlace.getTime();
-        const nightLength = sunriseTime.setDate(sunriseTime.getDate() + 1) - sunsetTime.getTime();
+    // Sunset
+    if (timeInPlace.isAfter(solarNoon) && isBeforeSunset) {
+        const timeToEnd = moment.utc(sunsetUnix.diff(timeInPlace))
 
-        console.log(
-            'Длина Ночи',
-            getHumanTime(nightLength, timeFormat.hours),
-            'часa(/ов)',
-            getHumanTime(nightLength, timeFormat.minutes),
-            'минут',
-            `(${nowInPlace.getHours()}:${nowInPlace.getMinutes()})`,
-        );
+        console.log('Солнце зайдет через', timeToEnd.format('HH:mm:ss'));
 
-        console.log('Night in place');
+        result.timesOfDay = DayPeriod.sunset;
+    }
 
-        if (timeToSunrise > 0) {
-            console.log(
-                'До рассвета',
-                getHumanTime(timeToSunrise, timeFormat.hours),
-                'часa(/ов)',
-                getHumanTime(timeToSunrise, timeFormat.minutes),
-                'минут',
-                `(${nowInPlace.getHours()}:${nowInPlace.getMinutes()})`,
-            );
+    // TODO проверка на полночь
+    if (timeInPlace.isAfter(sunsetUnix) || timeInPlace.isBefore(sunriseUnix)) {
+        const nightLength = moment.utc(sunriseUnix.add(1, 'day').diff(sunsetUnix))
 
-            // result.value
+        const timeToSunrise = moment.utc(sunriseUnix.diff(timeInPlace))
+        const timeAfterSunset = moment.utc(timeInPlace.diff(sunsetUnix))
+
+        console.log('Длина Ночи', nightLength.format('HH:mm:ss'));
+
+        if (timeInPlace.isBefore(sunriseUnix)) {
+            console.log('До рассвета', timeToSunrise.format('HH:mm:ss'));
         }
 
-        if (nowInPlace > sunsetTime) {
-            const timeAfterSunset = nowInPlace.getTime() - sunsetTime.getTime();
-
-            console.log(
-                'Прошло после захода',
-                getHumanTime(timeAfterSunset, timeFormat.hours),
-                'часa(/ов)',
-                getHumanTime(timeAfterSunset, timeFormat.minutes),
-                'минут',
-                `(${nowInPlace.getHours()}:${nowInPlace.getMinutes()})`,
-            );
+        if (timeInPlace.isAfter(sunsetUnix)) {
+            console.log('Прошло после захода', timeAfterSunset.format('HH:mm:ss'));
         }
 
-        result.timesOfDay = 'Night';
+        result.timesOfDay = DayPeriod.night;
     }
 
     return result;

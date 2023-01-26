@@ -40,6 +40,10 @@
     top: 0;
     transition: 0.2s top;
     padding: 24px;
+    background: linear-gradient(180deg,
+            rgba(255,255,255,0.3) 0%,
+            rgba(255,255,255,0.3) 50%,
+            rgba(255,255,255,0) 100%);
 
     &.hide {
         top: -100%;
@@ -73,6 +77,7 @@
 
     .day {
         display: flex;
+        text-align: right;
     }
 
     .condition {

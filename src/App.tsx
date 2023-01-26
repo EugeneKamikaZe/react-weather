@@ -10,8 +10,8 @@ import TestContainer from './components/TestContainer';
 import Stars from './components/SunWalk/Stars';
 import DevWalk from './components/SunWalk/Walk/DevWalk';
 import SunriseBg from './components/SunWalk/AnimatedBg/SunriseBg';
-import {useControls} from 'leva';
 import Walk from './components/SunWalk/Walk/Walk';
+import {useControls} from 'leva';
 
 export const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 export const APP_CONFIG = config;
