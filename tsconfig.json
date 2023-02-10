@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "es5",
+    "outDir": "./dist/",
     "useDefineForClassFields": true,
     "useUnknownInCatchVariables": false,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -14,9 +19,30 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": [
+      "vite-plugin-svg-icons/client",
+      "vite/client"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "custom.d.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "src",
+    "src/app/types/custom.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "composite": true,
+      "module": "CommonJS",
+      "moduleResolution": "node"
+    },
+    "include": ["vite.config.ts"]
+  }
 }

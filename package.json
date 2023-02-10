@@ -5,18 +5,22 @@
   "version": "0.0.1",
   "homepage": "https://eugenekamikaze.github.io/react-weather/",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "vite --port 3800",
+    "build:dev": "tsc && vite build --mode development",
+    "build:prod": "tsc && vite build --mode production",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist",
-    "predeploy": "npm run build",
-    "lint": "npx eslint src",
-    "lint:fix": "npm run lint -- --fix",
-    "prettier": "npx prettier src --check",
+    "lint:ts": "eslint -c ./config/eslint/.eslintrc.js \"**/*.{ts,tsx}\"",
+    "lint:ts:fix": "eslint -c ./config/eslint/.eslintrc.js \"**/*.{ts,tsx}\" --fix",
+    "lint:scss": "npx stylelint --config ./config/stylelint/.stylelintrc.json \"**/*.scss\"",
+    "lint:scss:fix": "npx stylelint --config ./config/stylelint/.stylelintrc.json \"**/*.scss\" --fix",
+    "prettier": "npx prettier --config ./config/prettier/.prettierrc src --check",
     "prettier:fix": "npm run prettier -- --write",
-    "format": "npm run prettier:fix && npm run lint:fix"
+    "format": "npm run prettier:fix && npm run lint:ts:fix && npm run lint:scss:fix",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^4.3.2"
@@ -25,15 +29,15 @@
     "@react-spring/types": "^9.6.1",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
-    "@typescript-eslint/eslint-plugin": "^5.26.0",
-    "@typescript-eslint/parser": "^5.26.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
     "@vitejs/plugin-react": "^1.3.0",
     "axios": "^0.27.2",
-    "classnames": "^2.3.2",
     "eslint": "^8.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.1",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -46,7 +50,10 @@
     "react-spring": "^9.6.1",
     "rollup-plugin-visualizer": "^5.9.0",
     "sass": "^1.57.1",
+    "stylelint": "^14.16.1",
+    "stylelint-config-standard-scss": "^3.0.0",
     "typescript": "^4.9.4",
-    "vite": "^3.2.5"
+    "vite": "^3.2.5",
+    "vite-plugin-chunk-split": "^0.4.7"
   }
 }

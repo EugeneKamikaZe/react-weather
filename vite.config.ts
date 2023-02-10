@@ -1,24 +1,19 @@
-import react from '@vitejs/plugin-react'
-import {defineConfig, type PluginOption} from 'vite'
-import {visualizer} from 'rollup-plugin-visualizer'
+import {defineConfig} from 'vite'
+import {resolve} from "path";
+import {BuildPath, VisualizerType} from "./config/build/types/config";
+import {viteBuild} from "./config/build/viteBuild";
 
-enum VisualizerTemplate {
-    treemap = 'treemap',
-    sunburst = 'sunburst',
-    network = 'network'
-}
+const paths: BuildPath = {
+    root: resolve(__dirname, 'src', 'main.tsx'),
+    analyze: resolve(__dirname, 'dist', 'analyze.html'),
+    src: resolve(__dirname, 'src'),
+};
 
-export default defineConfig({
-    base: './',
-    plugins: [
-        react(),
-        visualizer({
-            filename: 'dist/analyze.html',
-            open: true,
-            template: VisualizerTemplate.treemap,
-            gzipSize: true,
-            brotliSize : true,
-            sourcemap: false
-        }) as PluginOption
-    ]
-})
+const visualize = VisualizerType.TREE;
+
+export default defineConfig(
+    viteBuild({
+        paths,
+        visualize,
+    }),
+)
