@@ -5,6 +5,7 @@ import {viteBuild} from "./config/build/viteBuild";
 
 const paths: BuildPath = {
     root: resolve(__dirname, 'src', 'main.tsx'),
+    build: resolve(__dirname, 'dist'),
     analyze: resolve(__dirname, 'dist', 'analyze.html'),
     src: resolve(__dirname, 'src'),
 };

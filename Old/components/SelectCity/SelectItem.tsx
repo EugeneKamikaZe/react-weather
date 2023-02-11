@@ -1,8 +1,8 @@
-import React, { memo, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import React, { memo, SyntheticEvent, useState } from 'react';
 import s from './style.module.scss';
 import { CityProps } from './index';
 
-import Toggle from '../../assets/icons/toggle.svg';
+import Toggle from '@/shared/assets/icons/toggle.svg';
 import cn from 'classnames';
 import SpringSlide from './SpringSlide';
 

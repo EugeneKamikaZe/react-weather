@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import { useCity, useGeocode } from '../../store/geocode';
 
 import s from './style.module.scss';
@@ -40,10 +40,11 @@ const SelectCity: React.FC<ToggleProps> = ({ onToggle, isToggle }) => {
     );
 
     const [selected, setSelected] = useState(0);
-    const handleSelect = (city: CityProps) => {
+    const handleSelect = useCallback((city: CityProps) => {
         selectCity(city);
+
         setSelected(city.lat);
-    };
+    }, []);
 
     return (
         <>

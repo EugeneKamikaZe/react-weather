@@ -10,6 +10,7 @@ export enum VisualizerType {
 
 export interface BuildPath {
     root: string,
+    build: string,
     analyze: string,
     src: string,
 }

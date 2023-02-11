@@ -1,5 +1,3 @@
-@import 'src/scss/utilites/variables';
-
 .form {
     position: relative;
 
@@ -11,7 +9,7 @@
         backdrop-filter: blur(4px);
         transition: 0.2s box-shadow;
         border-radius: 4px;
-        background: rgba($white, 0.5);
+        background: rgba(var(--color-white), 0.5);
         width: 100%;
         height: 40px;
         content: '';
@@ -19,19 +17,19 @@
 
     &:hover {
         &::before {
-            box-shadow: 0 0 2px 2px rgba($white, 0.5);
+            box-shadow: 0 0 2px 2px rgba(var(--color-white), 0.5);
         }
     }
 
     label {
-        text-shadow: 1px 1px 2px rgba($white, 0.5);
+        text-shadow: 1px 1px 2px rgba(var(--color-white), 0.5);
     }
     input {
         position: relative;
         background: transparent;
 
         &::placeholder {
-            color: $default-color;
+            color: var(--color-default);
         }
     }
 }

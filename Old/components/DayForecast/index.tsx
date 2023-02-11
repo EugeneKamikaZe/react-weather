@@ -1,5 +1,5 @@
-import React, { memo, useEffect } from 'react';
-import { useDayForecast } from '../../store/weather';
+import React, {memo, useEffect, useState} from 'react';
+import {useDayForecast, WeatherResultProps} from '../../store/weather';
 
 import s from './style.module.scss';
 import cn from 'classnames';
@@ -8,9 +8,10 @@ import shallow from 'zustand/shallow';
 import { useCity } from '../../store/geocode';
 
 import moment from "moment";
-import 'moment-timezone';
 
 const DayForecast = ({ isToggle }: { isToggle: boolean }) => {
+    const [myData, setMyData] = useState<null | WeatherResultProps>(null)
+
     const { data, isLoading, isError, fetch } = useDayForecast(
         (state) => ({
             data: state.data,
@@ -34,6 +35,10 @@ const DayForecast = ({ isToggle }: { isToggle: boolean }) => {
             fetch(latitude, longitude);
         }
     }, [latitude, longitude]);
+
+    useEffect(() => {
+        data && setMyData(data)
+    })
 
     return (
         data && (

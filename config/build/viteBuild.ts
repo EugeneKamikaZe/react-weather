@@ -5,6 +5,7 @@ import { devServer } from './devServer';
 
 export function viteBuild(options: BuildOptions) {
     return {
+        base: './',
         resolve: resolves(options),
         server: devServer(),
         plugins: plugins(options),
@@ -12,6 +13,7 @@ export function viteBuild(options: BuildOptions) {
             devSourcemap: true,
         },
         build: {
+            outDir: options.paths.build,
             chunkSizeWarningLimit: 500,
         },
     };
