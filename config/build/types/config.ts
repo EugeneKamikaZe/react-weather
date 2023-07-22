@@ -1,21 +1,25 @@
-import { TemplateType } from 'rollup-plugin-visualizer/dist/plugin/template-types';
+export type BuildMode = 'production' | 'development';
 
-export enum VisualizerType {
-    TREE = 'treemap',
-    SUN = 'sunburst',
-    NET = 'network',
-    RAW = 'raw-data',
-    LIST = 'list'
+export interface BuildPaths {
+    entry: string;
+    build: string;
+    html: string;
+    src: string;
+    locales: string;
+    buildLocales: string;
 }
 
-export interface BuildPath {
-    root: string,
-    build: string,
-    analyze: string,
-    src: string,
+export interface BuildEnv {
+    mode: BuildMode;
+    port: number;
+    apiUrl: string;
 }
 
 export interface BuildOptions {
-    paths: BuildPath,
-    visualize: TemplateType | undefined
+    mode: BuildMode;
+    paths: BuildPaths;
+    isDev: boolean;
+    port: number;
+    apiUrl: string;
+    project: 'storybook' | 'frontend' | 'jest';
 }

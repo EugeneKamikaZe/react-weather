@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "outDir": "./dist",
+    "outDir": "./dist/",
     "useDefineForClassFields": true,
     "useUnknownInCatchVariables": false,
     "lib": [
@@ -19,22 +19,20 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "types": [
-      "vite/client"
-    ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "~/*": ["./src/*"]
     },
-    "noEmit": true,
     "jsx": "react-jsx"
   },
   "include": [
-    "src",
-    "src/app/types/custom.d.ts"
+    "./config/jest/setupTests.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
   ],
   "exclude": [
     "node_modules",
+    "Old"
   ],
   "ts-node": {
     "compilerOptions": {
@@ -42,6 +40,6 @@
       "module": "CommonJS",
       "moduleResolution": "node"
     },
-    "include": ["vite.config.ts"]
+    "include": ["webpack.config.ts"]
   }
 }

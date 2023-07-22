@@ -1,0 +1,11 @@
+export const htmlConfig = {
+    prettier: {
+        tabWidth: 4,
+        semi: true,
+        singleQuote: true,
+        trailingComma: 'all',
+        bracketSpacing: true,
+        bracketSameLine: false,
+        arrowParens: 'always',
+    },
+};

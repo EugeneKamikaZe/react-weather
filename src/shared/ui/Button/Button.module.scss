@@ -1,0 +1,151 @@
+//  Icon Position
+.right {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.left {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.top {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.bottom {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.wrapper {
+    display: flex;
+
+    // justify-content: center;
+    gap: 8px;
+    transition: var(--transition-btn);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    width: max-content;
+
+    // color: var(--color-default);
+
+    //  TODO что-то не так с LINE-HEIGHT
+    // line-height: 1 !important;
+
+    :global .icon {
+        fill: currentcolor;
+
+        // min-width: 16px;
+        // min-height: 16px;
+    }
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+//  Sizes
+.extra-small {
+    font: var(--font-button-sm);
+}
+
+.small {
+    font: var(--font-button-m);
+}
+
+.medium {
+    font: var(--font-button-m);
+}
+
+//  Types
+.primary,
+.secondary,
+.bordered {
+    border-radius: 4px;
+    font-weight: var(--font-weight-btns);
+    line-height: var(--font-line-headings);
+
+    &.extra-small {
+        padding: 0 8px;
+    }
+
+    &.small {
+        padding: 4px 16px;
+    }
+
+    &.medium {
+        padding: 8px 32px;
+    }
+}
+
+.primary {
+    background-color: var(--color-yellow);
+
+    &:hover {
+        background-color: var(--color-yellow-hover);
+    }
+}
+
+.secondary {
+    border: 1px solid var(--color-gray-400);
+    background-color: var(--color-white);
+
+    &:hover {
+        background-color: var(--color-gray-400);
+    }
+}
+
+.bordered {
+    border: 1px solid var(--color-gray-400);
+    background-color: var(--color-white);
+
+    &:hover {
+        border-color: var(--color-blue);
+        color: var(--color-blue);
+    }
+}
+
+.linkDashed {
+    border-bottom: 1px dashed currentcolor;
+    font-weight: var(--font-weight-normal);
+}
+
+.link,
+.linkMenu,
+.clear,
+.linkDashed {
+    border-radius: 0;
+    background: none;
+    padding: 0;
+    line-height: var(--font-line-normal);
+}
+
+// .link,
+// .linkDashed {
+//    color: var(--color-blue);
+//
+//    &:hover {
+//        color: var(--color-blue-hover);
+//    }
+// }
+
+.linkMenu {
+    color: var(--color-white);
+    font-size: var(--font-size-xs);
+    gap: 4px;
+
+    &:hover {
+        color: var(--color-yellow);
+    }
+}

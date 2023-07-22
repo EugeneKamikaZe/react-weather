@@ -1,22 +1,31 @@
+declare module '*.scss' {
+    interface IclassNames {
+        [className: string]: string;
+    }
+    const classNames: IclassNames;
+    export = classNames;
+}
+
+declare module '*.png';
+declare module '*.jpg';
+declare module '*.jpeg';
 declare module '*.svg' {
     import React = require('react');
 
-    export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-    const src: string;
-    export default src;
+    const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
+    export default SVG;
 }
 
-declare module "*.png" {
-    const content: any;
-    export default content;
-}
+declare const __IS_DEV__: boolean;
+declare const __API__: string;
+declare const __PROJECT__: 'storybook' | 'frontend' | 'jest';
 
-declare module '*.module.css' {
-    const classes: { readonly [key: string]: string };
-    export default classes;
-}
+type DeepPartial<T> = T extends object
+    ? {
+          [P in keyof T]?: DeepPartial<T[P]>;
+      }
+    : T;
 
-declare module '*.module.scss' {
-    const classes: { readonly [key: string]: string };
-    export default classes;
-}
+type OptionalRecord<K extends keyof any, T> = {
+    [P in K]?: T;
+};
