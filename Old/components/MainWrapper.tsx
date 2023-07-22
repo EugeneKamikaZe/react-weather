@@ -12,7 +12,7 @@ const MainWrapper = () => {
     };
 
     return (
-        <div className='block'>
+        <div className="block">
             <SunWalk />
 
             <SelectCity onToggle={handleToggle} isToggle={showToggle} />

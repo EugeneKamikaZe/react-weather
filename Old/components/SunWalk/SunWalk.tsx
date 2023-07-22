@@ -1,7 +1,7 @@
 import React from 'react';
+import { useControls } from 'leva';
 import { useDayForecast } from '../../store/weather';
 import { sunMove } from '../../helpers/sunWalk';
-import { useControls } from 'leva';
 
 import s from './style.module.scss';
 
@@ -10,7 +10,8 @@ import DayNightBg from './AnimatedBg/DayNightBg';
 
 const SunWalk = () => {
     const data = useDayForecast((state) => state.data);
-    const sunWalkResult = data && sunMove(data.sys.sunrise, data.sys.sunset, data.timezone);
+    const sunWalkResult =
+        data && sunMove(data.sys.sunrise, data.sys.sunset, data.timezone);
     const timeNow = sunWalkResult ? sunWalkResult.value : 0;
 
     // t = [0, ... timeNow, ... 1]
@@ -28,7 +29,7 @@ const SunWalk = () => {
         <div className={s.sunContainer}>
             <DayNightBg time={tBezier} />
 
-            {/*<SunriseBg time={tBezier}/>*/}
+            {/* <SunriseBg time={tBezier}/> */}
             <Walk time={timeNow} />
         </div>
     );

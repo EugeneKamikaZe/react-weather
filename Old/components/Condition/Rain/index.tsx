@@ -80,7 +80,7 @@ const Rain = () => {
 
     const AnimatedText = animated(Text);
 
-    return <div></div>;
+    return <div />;
 };
 
 export default Rain;

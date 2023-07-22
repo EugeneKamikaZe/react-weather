@@ -63,8 +63,6 @@ const SnowTypesEnum = [
     },
 ];
 
-const Snow = () => {
-    return <div></div>;
-};
+const Snow = () => <div />;
 
 export default Snow;

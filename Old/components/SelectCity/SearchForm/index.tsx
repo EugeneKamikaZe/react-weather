@@ -1,8 +1,8 @@
 import React, { ChangeEvent, memo, SyntheticEvent, useState } from 'react';
+import cn from 'classnames';
 import { useGeocode } from '../../../store/geocode';
 import capitalCity from '../../../helpers/randomCity';
 
-import cn from 'classnames';
 import s from './style.module.scss';
 
 import Input from '../Input';
@@ -36,17 +36,17 @@ const SearchForm = () => {
     return (
         <form onSubmit={handleSubmit} className={s.form}>
             <Input
-                className='input'
-                id='city'
-                labelText='Select City:'
+                className="input"
+                id="city"
+                labelText="Select City:"
                 placeholder={randomCity}
                 handleChange={handleChange}
             />
             <button
                 className={cn('btn btn-m btn-primary', s.searchBtn, {
-                    ['disabled']: searchClicked,
+                    disabled: searchClicked,
                 })}
-                type='submit'
+                type="submit"
                 disabled={searchClicked}
             >
                 Search

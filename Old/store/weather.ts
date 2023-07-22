@@ -1,7 +1,7 @@
 import create from 'zustand';
 import axios from 'axios';
-import {API_KEY} from '../App';
-import {devtools, persist} from "zustand/middleware";
+import { devtools, persist } from 'zustand/middleware';
+import { API_KEY } from '../App';
 
 type SimpleObj = { [key: string]: number };
 
@@ -38,34 +38,37 @@ export enum Units {
 }
 
 export const useDayForecast = create<WeatherProps>()(
-    devtools(persist(
-        (set) => ({
-            data: null,
-            isLoading: true,
-            isError: '',
-            fetch: async (lat, lng, units = 'metric') => {
-                try {
-                    const weatherAPI = 'https://api.openweathermap.org/data/2.5/weather';
-                    const response = await axios.get(
-                        `${weatherAPI}?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=${units}`,
-                    );
+    devtools(
+        persist(
+            (set) => ({
+                data: null,
+                isLoading: true,
+                isError: '',
+                fetch: async (lat, lng, units = 'metric') => {
+                    try {
+                        const weatherAPI =
+                            'https://api.openweathermap.org/data/2.5/weather';
+                        const response = await axios.get(
+                            `${weatherAPI}?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=${units}`,
+                        );
 
-                    set(() => ({
-                        data: response.data,
-                        isLoading: false,
-                    }));
-                } catch (error) {
-                    set(() => ({
-                        isError: error.message,
-                        isLoading: false,
-                    }));
-                }
+                        set(() => ({
+                            data: response.data,
+                            isLoading: false,
+                        }));
+                    } catch (error) {
+                        set(() => ({
+                            isError: error.message,
+                            isLoading: false,
+                        }));
+                    }
+                },
+            }),
+            {
+                name: 'Forecast',
             },
-        }),
-        {
-            name: 'Forecast'
-        }
-    ))
+        ),
+    ),
 );
 
 // export const useHourlyForecast = create<WeatherProps>((set) => ({
@@ -91,7 +94,6 @@ export const useDayForecast = create<WeatherProps>()(
 //         }
 //     },
 // }))
-
 
 // if (process.env.NODE_ENV === 'development') {
 //     useDayForecast = devtools(useDayForecast)

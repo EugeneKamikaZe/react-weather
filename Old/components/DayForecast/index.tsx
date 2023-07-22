@@ -1,16 +1,15 @@
-import React, {memo, useEffect, useState} from 'react';
-import {useDayForecast, WeatherResultProps} from '../../store/weather';
-
-import s from './style.module.scss';
+import React, { memo, useEffect, useState } from 'react';
 import cn from 'classnames';
 import shallow from 'zustand/shallow';
+import moment from 'moment';
+import { useDayForecast, WeatherResultProps } from '../../store/weather';
+
+import s from './style.module.scss';
 
 import { useCity } from '../../store/geocode';
 
-import moment from "moment";
-
 const DayForecast = ({ isToggle }: { isToggle: boolean }) => {
-    const [myData, setMyData] = useState<null | WeatherResultProps>(null)
+    const [myData, setMyData] = useState<null | WeatherResultProps>(null);
 
     const { data, isLoading, isError, fetch } = useDayForecast(
         (state) => ({
@@ -37,24 +36,26 @@ const DayForecast = ({ isToggle }: { isToggle: boolean }) => {
     }, [latitude, longitude]);
 
     useEffect(() => {
-        data && setMyData(data)
-    })
+        data && setMyData(data);
+    });
 
     return (
         data && (
             <div className={cn(s.weather, { [s.hide]: isToggle })}>
                 <div className={s.header}>
-                    <div className={s.temperature}>{Math.round(data.main.temp)}</div>
+                    <div className={s.temperature}>
+                        {Math.round(data.main.temp)}
+                    </div>
 
                     <div>
                         <div className={s.day}>
-                            {
-                                moment().utcOffset(data.timezone / 60).format('dddd')
-                            }
-                            <br/>
-                            {
-                                moment().utcOffset(data.timezone / 60).format('DD MMMM')
-                            }
+                            {moment()
+                                .utcOffset(data.timezone / 60)
+                                .format('dddd')}
+                            <br />
+                            {moment()
+                                .utcOffset(data.timezone / 60)
+                                .format('DD MMMM')}
                         </div>
 
                         <div className={s.condition}>
@@ -65,9 +66,9 @@ const DayForecast = ({ isToggle }: { isToggle: boolean }) => {
                     </div>
                 </div>
                 <p>
-                    {
-                        moment().utcOffset(data.timezone / 60).format('HH:mm:ss')
-                    }
+                    {moment()
+                        .utcOffset(data.timezone / 60)
+                        .format('HH:mm:ss')}
                 </p>
             </div>
         )

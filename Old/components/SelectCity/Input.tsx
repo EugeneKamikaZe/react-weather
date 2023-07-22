@@ -20,21 +20,19 @@ const Input: React.FC<IFormInput> = ({
     className,
     placeholder,
     children,
-}) => {
-    return (
-        <div className={className}>
-            <label htmlFor={id}>{labelText}</label>
-            <input
-                type={type}
-                id={id}
-                name={id}
-                value={value}
-                onChange={handleChange}
-                placeholder={placeholder}
-            />
-            {children}
-        </div>
-    );
-};
+}) => (
+    <div className={className}>
+        <label htmlFor={id}>{labelText}</label>
+        <input
+            type={type}
+            id={id}
+            name={id}
+            value={value}
+            onChange={handleChange}
+            placeholder={placeholder}
+        />
+        {children}
+    </div>
+);
 
 export default Input;

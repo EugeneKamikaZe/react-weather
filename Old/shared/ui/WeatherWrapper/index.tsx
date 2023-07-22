@@ -1,21 +1,17 @@
-import s from './index.module.scss'
-import {FC, ReactNode, Ref, useRef} from 'react';
-import cn from "classnames";
-import {Resizer} from "@/shared/ui/Resizer";
-import {Direction} from "@/shared/ui/Resizer/helpers/Direction";
-import {DragHeader} from "@/shared/ui/DragHeader";
+import { FC, ReactNode, Ref, useRef } from 'react';
+import cn from 'classnames';
+import s from './index.module.scss';
+import { Resizer } from '@/shared/ui/Resizer';
+import { Direction } from '@/shared/ui/Resizer/helpers/Direction';
+import { DragHeader } from '@/shared/ui/DragHeader';
 
 interface WrapperProps {
-    className?: string,
-    children: ReactNode
+    className?: string;
+    children: ReactNode;
 }
 
 export const WeatherWrapper: FC<WrapperProps> = (props) => {
-    const {
-        className,
-        children,
-        ...otherProps
-    } = props
+    const { className, children, ...otherProps } = props;
 
     const panelRef = useRef<HTMLDivElement>(null);
 
@@ -23,21 +19,33 @@ export const WeatherWrapper: FC<WrapperProps> = (props) => {
         const panel = panelRef.current;
         if (!panel) return;
 
-        const {x, y, top, right, bottom, left} = panel.getBoundingClientRect();
+        const { x, y, top, right, bottom, left } =
+            panel.getBoundingClientRect();
 
-        // if (top !== 0 && right !== 0 && bottom !== 0 && left !== 0) {
-            panel.style.left = `${x + movementX}px`;
+        if (top <= 0) {
+            panel.style.top = '2px';
+        } else {
             panel.style.top = `${y + movementY}px`;
-        // }
+        }
 
-        console.log(panel.getBoundingClientRect())
+        if (left <= 0) {
+            panel.style.left = '2px';
+        } else {
+            panel.style.left = `${x + movementX}px`;
+        }
+
+        console.log(panel.getBoundingClientRect());
     };
 
-    const handleResize = (direction: string, movementX: number, movementY: number) => {
+    const handleResize = (
+        direction: string,
+        movementX: number,
+        movementY: number,
+    ) => {
         const panel = panelRef.current;
         if (!panel) return;
 
-        const {width, height, x, y} = panel.getBoundingClientRect();
+        const { width, height, x, y } = panel.getBoundingClientRect();
 
         const resizeTop = () => {
             panel.style.height = `${height - movementY}px`;
@@ -100,19 +108,16 @@ export const WeatherWrapper: FC<WrapperProps> = (props) => {
     };
 
     return (
-        <div className={cn(s.WeatherWrapper, className)}
-             ref={panelRef}
-             {...otherProps}
+        <div
+            className={cn(s.WeatherWrapper, className)}
+            ref={panelRef}
+            {...otherProps}
         >
-            <DragHeader onDrag={handleDrag}>
-                asd
-            </DragHeader>
+            <DragHeader onDrag={handleDrag}>asd</DragHeader>
 
-            <Resizer onResize={handleResize}/>
+            <Resizer onResize={handleResize} />
 
-            <div>
-                {children}
-            </div>
+            <div>{children}</div>
         </div>
     );
 };

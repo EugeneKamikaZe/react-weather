@@ -1,8 +1,8 @@
 import create from 'zustand';
 import axios from 'axios';
+import { devtools, persist } from 'zustand/middleware';
 import { CityProps } from '../components/SelectCity';
 import { API_KEY } from '../App';
-import {devtools, persist} from "zustand/middleware";
 
 interface GeocodeProps {
     data: null | CityProps[];
@@ -26,7 +26,8 @@ export const useGeocode = create<GeocodeProps>()(
                 isError: '',
                 fetch: async (initialPlace, limit = 5) => {
                     try {
-                        const weatherAPI = 'https://api.openweathermap.org/geo/1.0/direct';
+                        const weatherAPI =
+                            'https://api.openweathermap.org/geo/1.0/direct';
                         const response = await axios.get(
                             `${weatherAPI}?q=${initialPlace}&appid=${API_KEY}&limit=${limit}`,
                         );
@@ -44,10 +45,10 @@ export const useGeocode = create<GeocodeProps>()(
                 },
             }),
             {
-                name: 'Geocode'
-            }
-        )
-    )
+                name: 'Geocode',
+            },
+        ),
+    ),
 );
 
 export const useCity = create<PositionProps>()(
@@ -63,8 +64,8 @@ export const useCity = create<PositionProps>()(
                     }),
             }),
             {
-                name: 'City'
-            }
-        )
-    )
+                name: 'City',
+            },
+        ),
+    ),
 );

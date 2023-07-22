@@ -1,11 +1,11 @@
 import React from 'react';
 
+import shallow from 'zustand/shallow';
 import s from './style.module.scss';
 import DayForecast from '../../DayForecast';
 // import SunWalk, { GeoProps } from '../../SunWalk';
 import MountainsPng from '../../../assets/landscape/mountains.png';
 import { useDayForecast } from '../../../store/weather';
-import shallow from 'zustand/shallow';
 import SunWalk from '../../SunWalk/SunWalk';
 
 const DefaultTypesEnum = [
@@ -27,7 +27,7 @@ const Default = () => {
         shallow,
     );
 
-    return data && <div className={s.default}></div>;
+    return data && <div className={s.default} />;
 };
 
 export default Default;

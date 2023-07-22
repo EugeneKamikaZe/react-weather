@@ -1,8 +1,8 @@
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
 
-import s from './style.module.scss';
 import { useControls } from 'leva';
+import s from './style.module.scss';
 
 interface SunriseSunsetBgProps {
     time: number;
@@ -54,7 +54,8 @@ const DayNightBg: React.FC<SunriseSunsetBgProps> = ({ time }) => {
     if (time > sunsetHalf * 2 && time < sunsetHalf * 2 + sunsetHalf) {
         opacityChanger = (time - sunsetHalf * 2) / sunsetHalf;
     } else if (time >= sunsetHalf * 2 + sunsetHalf) {
-        opacityChanger = 1 - (time - (sunsetHalf * 2 + sunsetHalf)) / sunsetHalf;
+        opacityChanger =
+            1 - (time - (sunsetHalf * 2 + sunsetHalf)) / sunsetHalf;
     }
 
     const { R, B, G } = useControls('Sun', {

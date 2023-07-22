@@ -22,7 +22,8 @@ const DayNightBg: React.FC<AnimatedBgProps> = ({ value, max }) => {
             opacity: opacityChanger,
         },
         from: {
-            backgroundImage: 'linear-gradient(to top, #4160ff 0%, #07004e 100%)',
+            backgroundImage:
+                'linear-gradient(to top, #4160ff 0%, #07004e 100%)',
             opacity: 0,
         },
         config: { mass: 1, tension: 2000, friction: 500 },

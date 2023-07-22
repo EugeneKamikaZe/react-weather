@@ -11,7 +11,9 @@ const Statistic = () => {
             <div className={s.block}>
                 <p>
                     <b>Weather:</b>{' '}
-                    {data.weather.map((item: any) => `${item.main} (id: ${item.id})`)}
+                    {data.weather.map(
+                        (item: any) => `${item.main} (id: ${item.id})`,
+                    )}
                 </p>
                 <p>
                     <b>Pressure (давление):</b> {data.main.pressure}hPa
@@ -27,7 +29,7 @@ const Statistic = () => {
                 </p>
                 <p>
                     <b>Wind:</b> {data.wind.speed}m/s | {data.wind.deg}deg;
-                    {data.wind.gust && ' | Gust:' + data.wind.gust + 'm/s'}
+                    {data.wind.gust && ` | Gust:${data.wind.gust}m/s`}
                 </p>
                 {data.rain && (
                     <p>

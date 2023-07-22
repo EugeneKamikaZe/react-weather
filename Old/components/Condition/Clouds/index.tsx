@@ -26,8 +26,6 @@ const CloudsTypesEnum = [
     },
 ];
 
-const Clouds = () => {
-    return <div></div>;
-};
+const Clouds = () => <div />;
 
 export default Clouds;

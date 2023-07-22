@@ -57,8 +57,6 @@ const ThunderstormTypesEnum = [
     },
 ];
 
-const Thunderstorm = () => {
-    return <div></div>;
-};
+const Thunderstorm = () => <div />;
 
 export default Thunderstorm;

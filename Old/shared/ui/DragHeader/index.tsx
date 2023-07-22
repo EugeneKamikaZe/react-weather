@@ -1,14 +1,14 @@
-import s from './index.module.scss'
-import {FC, ReactNode, useEffect, useState} from "react";
-import cn from "classnames";
+import { FC, ReactNode, useEffect, useState } from 'react';
+import cn from 'classnames';
+import s from './index.module.scss';
 
 interface indexProps {
-    className?: string
-    children?: ReactNode
-    onDrag: (x: number, y: number) => void
+    className?: string;
+    children?: ReactNode;
+    onDrag: (x: number, y: number) => void;
 }
 
-export const DragHeader: FC<indexProps> = ({className, children, onDrag }) => {
+export const DragHeader: FC<indexProps> = ({ className, children, onDrag }) => {
     const [mouseDown, setMouseDown] = useState(false);
 
     useEffect(() => {
@@ -22,12 +22,16 @@ export const DragHeader: FC<indexProps> = ({className, children, onDrag }) => {
     }, []);
 
     useEffect(() => {
-        const ratio = window.devicePixelRatio
+        const ratio = window.devicePixelRatio;
 
-        const handleMouseMove = (e: MouseEvent) => onDrag(e.movementX / ratio, e.movementY / ratio);
+        const handleMouseMove = (e: MouseEvent) =>
+            onDrag(e.movementX / ratio, e.movementY / ratio);
 
         if (mouseDown) {
+            document.body.style.overflow = 'hidden';
             window.addEventListener('mousemove', handleMouseMove);
+        } else {
+            document.body.style.overflow = 'auto';
         }
 
         return () => {
@@ -38,7 +42,10 @@ export const DragHeader: FC<indexProps> = ({className, children, onDrag }) => {
     const handleMouseDown = () => setMouseDown(true);
 
     return (
-        <div className={cn(s.DrugHeader, className)} onMouseDown={handleMouseDown}>
+        <div
+            className={cn(s.DrugHeader, className)}
+            onMouseDown={handleMouseDown}
+        >
             {children}
         </div>
     );

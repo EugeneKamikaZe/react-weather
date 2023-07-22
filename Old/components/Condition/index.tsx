@@ -8,8 +8,6 @@ interface ConditionProps {
     description?: string;
 }
 
-const Condition = () => {
-    return <div></div>;
-};
+const Condition = () => <div />;
 
 export default Condition;

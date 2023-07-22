@@ -51,8 +51,6 @@ const DrizzleTypesEnum = [
     },
 ];
 
-const Drizzle = () => {
-    return <div></div>;
-};
+const Drizzle = () => <div />;
 
 export default Drizzle;

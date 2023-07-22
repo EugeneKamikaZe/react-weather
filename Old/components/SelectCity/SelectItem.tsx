@@ -1,9 +1,9 @@
 import React, { memo, SyntheticEvent, useState } from 'react';
+import cn from 'classnames';
 import s from './style.module.scss';
 import { CityProps } from './index';
 
 import Toggle from '@/shared/assets/icons/toggle.svg';
-import cn from 'classnames';
 import SpringSlide from './SpringSlide';
 
 interface SelectProps {
@@ -34,10 +34,16 @@ const SelectItem: React.FC<SelectProps> = ({ item, onSelect, currentLat }) => {
             <div className={s.resultItem_info}>
                 <p className={s.textWToggle}>
                     {item.name} ({item.country})
-                    <img className={cn({ [s.show]: isShow })} src={Toggle} alt='toggle' />
+                    <img
+                        className={cn({ [s.show]: isShow })}
+                        src={Toggle}
+                        alt="toggle"
+                    />
                 </p>
                 <button
-                    className={cn('btn btn-xs btn-primary', { ['disabled']: isCurrentLat })}
+                    className={cn('btn btn-xs btn-primary', {
+                        disabled: isCurrentLat,
+                    })}
                     disabled={currentLat === item.lat}
                     onClick={(e: SyntheticEvent) => {
                         e.stopPropagation();

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useControls } from 'leva';
+import cn from 'classnames';
 import { Bezier } from '../../../helpers/bezier';
 
-import cn from 'classnames';
 import s from './style.module.scss';
 
 const DevWalk = () => {
@@ -24,13 +24,11 @@ const DevWalk = () => {
             max: 1000,
             step: 10,
             onChange: (value) => {
-                setD((prev) => {
-                    return {
-                        ...prev,
-                        x1: value.x,
-                        y1: value.y,
-                    };
-                });
+                setD((prev) => ({
+                    ...prev,
+                    x1: value.x,
+                    y1: value.y,
+                }));
             },
         },
         P2: {
@@ -39,13 +37,11 @@ const DevWalk = () => {
             max: 1000,
             step: 10,
             onChange: (value) => {
-                setD((prev) => {
-                    return {
-                        ...prev,
-                        x2: value.x,
-                        y2: value.y,
-                    };
-                });
+                setD((prev) => ({
+                    ...prev,
+                    x2: value.x,
+                    y2: value.y,
+                }));
             },
         },
         P3: {
@@ -54,13 +50,11 @@ const DevWalk = () => {
             max: 1000,
             step: 10,
             onChange: (value) => {
-                setD((prev) => {
-                    return {
-                        ...prev,
-                        x3: value.x,
-                        y3: value.y,
-                    };
-                });
+                setD((prev) => ({
+                    ...prev,
+                    x3: value.x,
+                    y3: value.y,
+                }));
             },
         },
         sunRadius: {
@@ -100,31 +94,25 @@ const DevWalk = () => {
 
         switch (drag) {
             case c1.current:
-                setD((prev) => {
-                    return {
-                        ...prev,
-                        x1: drag.getAttribute('cx'),
-                        y1: drag.getAttribute('cy'),
-                    };
-                });
+                setD((prev) => ({
+                    ...prev,
+                    x1: drag.getAttribute('cx'),
+                    y1: drag.getAttribute('cy'),
+                }));
                 break;
             case c2.current:
-                setD((prev) => {
-                    return {
-                        ...prev,
-                        x2: drag.getAttribute('cx'),
-                        y2: drag.getAttribute('cy'),
-                    };
-                });
+                setD((prev) => ({
+                    ...prev,
+                    x2: drag.getAttribute('cx'),
+                    y2: drag.getAttribute('cy'),
+                }));
                 break;
             case c3.current:
-                setD((prev) => {
-                    return {
-                        ...prev,
-                        x3: drag.getAttribute('cx'),
-                        y3: drag.getAttribute('cy'),
-                    };
-                });
+                setD((prev) => ({
+                    ...prev,
+                    x3: drag.getAttribute('cx'),
+                    y3: drag.getAttribute('cy'),
+                }));
                 break;
         }
     }
@@ -145,39 +133,39 @@ const DevWalk = () => {
 
     return (
         <div className={s.devWrapper}>
-            <svg className={s.devSunWalk} xmlns='http://www.w3.org/2000/svg'>
+            <svg className={s.devSunWalk} xmlns="http://www.w3.org/2000/svg">
                 <path
                     d={`M${d.x1} ${d.y1} Q ${d.x2} ${d.y2} ${d.x3} ${d.y3}`}
-                    stroke='#091e42'
-                    fill='transparent'
-                    strokeWidth='2'
+                    stroke="#091e42"
+                    fill="transparent"
+                    strokeWidth="2"
                 />
 
                 <circle
                     cx={d.x1}
                     cy={d.y1}
-                    r='5'
-                    stroke='transparent'
-                    fill='#ffd80a'
-                    strokeWidth='2'
+                    r="5"
+                    stroke="transparent"
+                    fill="#ffd80a"
+                    strokeWidth="2"
                     ref={c1}
                 />
                 <circle
                     cx={d.x2}
                     cy={d.y2}
-                    r='5'
-                    stroke='transparent'
-                    fill='#ffd80a'
-                    strokeWidth='2'
+                    r="5"
+                    stroke="transparent"
+                    fill="#ffd80a"
+                    strokeWidth="2"
                     ref={c2}
                 />
                 <circle
                     cx={d.x3}
                     cy={d.y3}
-                    r='5'
-                    stroke='transparent'
-                    fill='#ffd80a'
-                    strokeWidth='2'
+                    r="5"
+                    stroke="transparent"
+                    fill="#ffd80a"
+                    strokeWidth="2"
                     ref={c3}
                 />
 
@@ -185,13 +173,15 @@ const DevWalk = () => {
                     cx={mx}
                     cy={my}
                     r={sunRadius}
-                    stroke='transparent'
+                    stroke="transparent"
                     fill={sunColor}
-                    strokeWidth='2'
+                    strokeWidth="2"
                 />
             </svg>
 
-            <button className={cn(s.apply, 'btn btn-xs btn-primary')}>Apply</button>
+            <button className={cn(s.apply, 'btn btn-xs btn-primary')}>
+                Apply
+            </button>
         </div>
     );
 };

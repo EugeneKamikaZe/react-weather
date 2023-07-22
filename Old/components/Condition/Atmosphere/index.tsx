@@ -56,8 +56,6 @@ const AtmosphereTypesEnum = [
     },
 ];
 
-const Atmosphere = () => {
-    return <div></div>;
-};
+const Atmosphere = () => <div />;
 
 export default Atmosphere;
