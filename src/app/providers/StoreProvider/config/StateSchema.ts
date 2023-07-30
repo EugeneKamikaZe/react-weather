@@ -7,14 +7,16 @@ import type {
 } from '@reduxjs/toolkit';
 import type { AxiosInstance } from 'axios';
 
-import type { UserSchema } from '~/entities/User';
+import type { AirPollutionSchema } from '~/entities/AirPollution';
+import type { CurrentWeatherSchema } from '~/entities/CurrentWeather';
 import { rtkApi } from '~/shared/api/rtkApi';
 
 export interface StateSchema {
-    user: UserSchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
     //  Асинхронные редюсеры
+    weatherCurrent?: CurrentWeatherSchema;
+    airPollution?: AirPollutionSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

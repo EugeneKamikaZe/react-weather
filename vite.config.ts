@@ -23,6 +23,7 @@ export default defineConfig({
     },
     server: {
         host: true,
+        https: true,
         open: true,
         watch: {
             usePolling: true,
@@ -53,7 +54,8 @@ export default defineConfig({
     },
     define: {
         __IS_DEV__: JSON.stringify(true),
-        __API__: JSON.stringify('http://localhost:8000'),
+        __API__: JSON.stringify('https://api.openweathermap.org'),
+        __API_KEY__: JSON.stringify('46c7e8ffbbf9ba21fe33df6625f2ec10'),
         __PROJECT__: JSON.stringify('frontend'),
     },
 });

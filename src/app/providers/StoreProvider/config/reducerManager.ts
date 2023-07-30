@@ -1,6 +1,9 @@
-import { AnyAction, combineReducers, Reducer } from '@reduxjs/toolkit';
-
-import { UserSchema } from '~/entities/User';
+import {
+    AnyAction,
+    combineReducers,
+    Reducer,
+    ReducersMapObject,
+} from '@reduxjs/toolkit';
 
 import {
     MountedReducers,
@@ -9,17 +12,17 @@ import {
     StateSchemaKey,
 } from './StateSchema';
 
-export function createReducerManager(initialReducers: {
-    user: (state: UserSchema | undefined, action: AnyAction) => UserSchema;
-}): ReducerManager {
+export function createReducerManager(
+    initialReducers: ReducersMapObject<StateSchema>,
+): ReducerManager {
     const reducers = { ...initialReducers };
 
-    let combinedReducer = combineReducers(reducers);
+    let combinedReducer = combineReducers<StateSchema>(reducers);
 
     let keysToRemove: Array<StateSchemaKey> = [];
     const mountedReducers: MountedReducers = {};
 
-    return {
+    return <ReducerManager>{
         getReducerMap: () => reducers,
         getMountedReducers: () => mountedReducers,
         reduce: (state: StateSchema, action: AnyAction) => {

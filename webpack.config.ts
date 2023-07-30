@@ -12,7 +12,14 @@ function getApiUrl(mode: BuildMode, apiUrl?: string) {
         return '/api';
     }
 
-    return 'http://localhost:8000';
+    return 'https://api.openweathermap.org';
+}
+
+function getApiKey(mode: BuildMode, apiKey?: string) {
+    if (apiKey) {
+        return apiKey;
+    }
+    return '46c7e8ffbbf9ba21fe33df6625f2ec10';
 }
 
 export default (env: BuildEnv) => {
@@ -28,6 +35,7 @@ export default (env: BuildEnv) => {
     const mode = env.mode || 'development';
     const PORT = env.port || 3000;
     const apiUrl = getApiUrl(mode, env?.apiUrl);
+    const apiKey = getApiKey(mode, env?.apiKey);
 
     const isDev = mode === 'development';
 
@@ -36,6 +44,7 @@ export default (env: BuildEnv) => {
         paths,
         isDev,
         apiUrl,
+        apiKey,
         port: PORT,
         project: 'frontend',
     });

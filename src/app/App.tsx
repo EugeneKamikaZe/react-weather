@@ -1,5 +1,7 @@
 import { Suspense } from 'react';
 
+import { AirPollution } from '~/entities/AirPollution';
+import { CurrentWeather } from '~/entities/CurrentWeather';
 import { useTheme } from '~/shared/lib/hooks/useTheme/useTheme';
 
 import { AppRouter } from './providers/router/index';
@@ -10,6 +12,9 @@ const App = () => {
     return (
         <Suspense fallback="">
             <div data-theme={theme}>
+                <CurrentWeather />
+                <AirPollution />
+
                 <AppRouter />
             </div>
         </Suspense>
