@@ -1,10 +1,9 @@
 import { Suspense } from 'react';
 
-import { AirPollution } from '~/entities/AirPollution';
-import { CurrentWeather } from '~/entities/CurrentWeather';
+import { AirPollution } from '~/features/AirPollution';
+import { CurrentWeather } from '~/features/CurrentWeather';
+import { RequestForm } from '~/features/RequestForm';
 import { useTheme } from '~/shared/lib/hooks/useTheme/useTheme';
-
-import { AppRouter } from './providers/router/index';
 
 const App = () => {
     const { theme } = useTheme();
@@ -15,7 +14,7 @@ const App = () => {
                 <CurrentWeather />
                 <AirPollution />
 
-                <AppRouter />
+                <RequestForm />
             </div>
         </Suspense>
     );

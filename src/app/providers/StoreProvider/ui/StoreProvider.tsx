@@ -2,7 +2,7 @@ import { DeepPartial, ReducersMapObject } from '@reduxjs/toolkit';
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 
-import { StateSchema } from '../config/StateSchema';
+import type { StateSchema } from '../config/StateSchema';
 import { createReduxStore } from '../config/store';
 
 interface StoreProviderProps {

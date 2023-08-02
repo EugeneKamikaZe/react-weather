@@ -2,7 +2,6 @@ import './app/styles/index.scss';
 import './shared/config/i18n/i18n';
 
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 
 import App from '~/app/App';
 import { ComposeProviders } from '~/app/providers/ComposeProviders';
@@ -18,9 +17,7 @@ if (!container) {
 
 const root = createRoot(container);
 root.render(
-    <ComposeProviders
-        components={[BrowserRouter, StoreProvider, ThemeProvider]}
-    >
+    <ComposeProviders components={[StoreProvider, ThemeProvider]}>
         <ErrorBoundary>
             <App />
         </ErrorBoundary>
