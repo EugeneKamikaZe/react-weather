@@ -2,22 +2,19 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ThunkConfig } from '~/app/providers/StoreProvider';
 import { GEOCODE_LOCALSTORAGE } from '~/shared/const/localstorage';
+import { City } from '~/shared/types/city';
 import type { GeocodeRequest } from '~/shared/types/request';
 
-import type { GeocodeSchema } from '../types/geocodeSchema';
-
 export const geocode = createAsyncThunk<
-    // City[],
-    GeocodeSchema,
+    City[],
     GeocodeRequest,
-    // ThunkConfig<string & City[]>
-    ThunkConfig<string | any>
+    ThunkConfig<string>
 >('geocode', async (data, thunkApi) => {
     const { extra, rejectWithValue } = thunkApi;
     const { cityName, limit = 5 } = data;
 
     try {
-        const response = await extra.api.get<GeocodeSchema>(
+        const response = await extra.api.get<City[]>(
             `/geo/1.0/direct?q=${cityName}&limit=${limit}&appid=${__API_KEY__}`,
         );
 
@@ -30,15 +27,15 @@ export const geocode = createAsyncThunk<
             JSON.stringify(response.data),
         );
 
-        // if (__IS_DEV__) {
-        //     console.log(response);
-        // }
+        if (__IS_DEV__) {
+            console.log('geocode: ', response.data);
+        }
 
         return response.data;
     } catch (e) {
-        // if (__IS_DEV__) {
-        //     console.log(e.response);
-        // }
+        if (__IS_DEV__) {
+            console.log('geocode error: ', e.response);
+        }
         return rejectWithValue('error');
     }
 });

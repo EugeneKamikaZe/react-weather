@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 
-import { AirPollution } from '~/features/AirPollution';
-import { CurrentWeather } from '~/features/CurrentWeather';
 import { RequestForm } from '~/features/RequestForm';
+import { SelectCity } from '~/features/SelectCity';
 import { useTheme } from '~/shared/lib/hooks/useTheme/useTheme';
+import { DevData } from '~/widgets/DevData';
 
 const App = () => {
     const { theme } = useTheme();
@@ -11,10 +11,13 @@ const App = () => {
     return (
         <Suspense fallback="">
             <div data-theme={theme}>
-                <CurrentWeather />
-                <AirPollution />
+                {/* <CurrentWeather /> */}
+                {/* <AirPollution /> */}
+
+                {__IS_DEV__ && <DevData />}
 
                 <RequestForm />
+                <SelectCity />
             </div>
         </Suspense>
     );

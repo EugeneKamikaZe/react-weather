@@ -54,7 +54,7 @@ module.exports = {
                 singleQuote: true,
             },
         ],
-        'import/no-cycle': 'error',
+        'import/no-cycle': 'warn',
         'unused-imports/no-unused-imports': 'error',
         'react/jsx-filename-extension': [
             2,

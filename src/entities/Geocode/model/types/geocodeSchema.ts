@@ -1,4 +1,4 @@
-import type { City } from './city';
+import type { City } from '../../../../shared/types/city';
 
 export interface GeocodeSchema {
     data: City[];

@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { City } from '~/shared/types/city';
+
 import { geocode } from '../services/geocode';
-import type { City } from '../types/city';
 import type { GeocodeSchema } from '../types/geocodeSchema';
 
 const initialState: GeocodeSchema = {

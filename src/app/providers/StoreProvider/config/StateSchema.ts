@@ -10,9 +10,11 @@ import type { AxiosInstance } from 'axios';
 import type { GeocodeSchema } from '~/entities/Geocode';
 import type { AirPollutionSchema } from '~/features/AirPollution';
 import type { CurrentWeatherSchema } from '~/features/CurrentWeather';
+import type { SelectCitySchema } from '~/features/SelectCity';
 import { rtkApi } from '~/shared/api/rtkApi';
 
 export interface StateSchema {
+    selectCity: SelectCitySchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
     //  Асинхронные редюсеры

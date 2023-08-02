@@ -1,6 +1,7 @@
 import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
 import type { CombinedState, Reducer } from 'redux';
 
+import { selectCityReducer } from '~/features/SelectCity';
 import { $api } from '~/shared/api/api';
 import { rtkApi } from '~/shared/api/rtkApi';
 
@@ -13,6 +14,7 @@ export function createReduxStore(
 ) {
     const rootReducers: ReducersMapObject<StateSchema> = {
         ...asyncReducers,
+        selectCity: selectCityReducer,
         [rtkApi.reducerPath]: rtkApi.reducer,
     };
 

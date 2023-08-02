@@ -41,7 +41,7 @@ export const CurrentWeather = () => {
         //     console.log(result.payload);
         // }
 
-        console.log(result);
+        // console.log(result);
     };
 
     return (

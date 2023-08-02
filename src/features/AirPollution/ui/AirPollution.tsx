@@ -35,7 +35,7 @@ export const AirPollution = () => {
         };
         const result = await dispatch(airPollution(weatherProps));
 
-        console.log(result);
+        // console.log(result);
 
         // if (result.meta.requestStatus === 'fulfilled') {
         //     dispatch(airPollutionActions.setAirPollutionData(result.payload));

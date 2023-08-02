@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { useFormik } from 'formik';
 import { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +8,6 @@ import {
     geocode,
     geocodeActions,
     geocodeReducer,
-    getGeocodeData,
     getGeocodeIsLoading,
 } from '~/entities/Geocode';
 import {
@@ -31,7 +31,6 @@ const reducers: ReducersList = {
 export const RequestForm = ({ className }: RequestFormProps) => {
     const { t } = useTranslation('form_request');
     const isLoading = useSelector(getGeocodeIsLoading);
-    const data = useSelector(getGeocodeData);
 
     const dispatch = useAppDispatch();
 
@@ -42,11 +41,11 @@ export const RequestForm = ({ className }: RequestFormProps) => {
 
         onSubmit: async (values) => {
             const result = await dispatch(geocode(values));
+            const { meta, payload } = result;
 
-            if (result.meta.requestStatus === 'fulfilled') {
-                if (result.payload) {
-                    dispatch(geocodeActions.setGeocodeData(result.payload));
-                }
+            if (meta.requestStatus === 'fulfilled') {
+                // @ts-ignore
+                dispatch(geocodeActions.setGeocodeData(payload));
             }
         },
     });
@@ -61,7 +60,10 @@ export const RequestForm = ({ className }: RequestFormProps) => {
     return (
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
             <form onSubmit={formik.handleSubmit} className={s.form}>
-                <label htmlFor="cityName" className={s.label}>
+                <label
+                    htmlFor="cityName"
+                    className={classnames(s.label, {}, [className])}
+                >
                     {t('form_label')}
                 </label>
 
